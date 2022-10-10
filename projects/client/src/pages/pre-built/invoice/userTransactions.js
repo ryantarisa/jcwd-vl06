@@ -42,7 +42,7 @@ const UserTransactions = () => {
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemPerPage, setItemPerPage] = useState(2);
+  const [itemPerPage, setItemPerPage] = useState(10);
   const [asc, setAsc] = useState(false);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -223,20 +223,24 @@ const UserTransactions = () => {
                               <li>
                                 <span>Show(per page)</span>
                               </li>
-                              <li className={itemPerPage === 2 ? "active" : ""}>
+                              <li
+                                className={itemPerPage === 10 ? "active" : ""}
+                              >
                                 <DropdownItem
                                   tag="a"
-                                  onClick={() => setPerPage(2)}
+                                  onClick={() => setPerPage(10)}
                                 >
-                                  2 item
+                                  10 item
                                 </DropdownItem>
                               </li>
-                              <li className={itemPerPage === 4 ? "active" : ""}>
+                              <li
+                                className={itemPerPage === 15 ? "active" : ""}
+                              >
                                 <DropdownItem
                                   tag="a"
-                                  onClick={() => setPerPage(4)}
+                                  onClick={() => setPerPage(15)}
                                 >
-                                  4 items
+                                  15 items
                                 </DropdownItem>
                               </li>
                             </ul>

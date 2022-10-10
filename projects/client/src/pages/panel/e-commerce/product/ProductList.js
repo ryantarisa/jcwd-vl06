@@ -74,7 +74,7 @@ const ProductList = () => {
 
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemPerPage] = useState(5);
+  const [itemPerPage] = useState(10);
 
   // CONVERT PRICE TO CURRENCY TYPE
   const toCurrency = (data) => {
@@ -419,7 +419,7 @@ const ProductList = () => {
         <Block>
           <div className="nk-tb-list is-separate is-medium mb-3">
             <DataTableHead className="nk-tb-item">
-              <DataTableRow className="nk-tb-col-check">
+              {/* <DataTableRow className="nk-tb-col-check">
                 <div className="custom-control custom-control-sm custom-checkbox notext">
                   <input
                     type="checkbox"
@@ -432,7 +432,7 @@ const ProductList = () => {
                     htmlFor="uid_1"
                   ></label>
                 </div>
-              </DataTableRow>
+              </DataTableRow> */}
               <DataTableRow size="sm">
                 <span>Name</span>
               </DataTableRow>
@@ -462,7 +462,7 @@ const ProductList = () => {
               </DataTableRow>
 
               <DataTableRow className="nk-tb-col-tools">
-                <ul className="nk-tb-actions gx-1 my-n1">
+                {/* <ul className="nk-tb-actions gx-1 my-n1">
                   <li className="mr-n1">
                     <UncontrolledDropdown>
                       <DropdownToggle
@@ -525,7 +525,7 @@ const ProductList = () => {
                       </DropdownMenu>
                     </UncontrolledDropdown>
                   </li>
-                </ul>
+                </ul> */}
               </DataTableRow>
             </DataTableHead>
 
@@ -533,7 +533,7 @@ const ProductList = () => {
               ? products.map((item) => {
                   return (
                     <DataTableItem key={item.id}>
-                      <DataTableRow className="nk-tb-col-check">
+                      {/* <DataTableRow className="nk-tb-col-check">
                         <div className="custom-control custom-control-sm custom-checkbox notext">
                           <input
                             type="checkbox"
@@ -548,7 +548,7 @@ const ProductList = () => {
                             htmlFor={item.id + "uid1"}
                           ></label>
                         </div>
-                      </DataTableRow>
+                      </DataTableRow> */}
                       <DataTableRow size="sm">
                         <span className="tb-product">
                           <img
@@ -674,12 +674,14 @@ const ProductList = () => {
 
           <PreviewAltCard>
             {products.length ? (
-              <PaginationComponent
-                itemPerPage={itemPerPage}
-                totalItems={productCount}
-                paginate={paginate}
-                currentPage={currentPage}
-              />
+              <div className="d-flex justify-content-end">
+                <PaginationComponent
+                  itemPerPage={itemPerPage}
+                  totalItems={productCount}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
+              </div>
             ) : (
               <div className="text-center">
                 <span className="text-silent">No products found</span>
