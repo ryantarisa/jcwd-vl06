@@ -6,6 +6,21 @@ import Payment from "../models/PaymentModel.js";
 import Products from "../models/ProductModel.js";
 import Users from "../models/UserModel.js";
 
+export const addInvoiceHeaders = async (req, res) => {
+  const { invoice_id, user_id, grand_total, address_id } = req.body;
+  try {
+    const response = await InvoiceHeader.create({
+      invoice_id,
+      user_id,
+      grand_total,
+      address_id,
+    });
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
 export const getInvoiceHeaders = async (req, res) => {
   try {
     const { page, perPage, invoice_id, asc, startDate, endDate } = req.body;
@@ -70,7 +85,7 @@ export const getInvoicesByUserId = async (req, res) => {
       include: [
         {
           model: InvoiceDetail,
-          include: [{ model: Products, attributes: ["name"] }],
+          include: [{ model: Products, attributes: ["name", "image"] }],
         },
         { model: Users, attributes: ["first_name", "last_name"] },
         { model: Payment },

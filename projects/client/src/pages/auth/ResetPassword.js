@@ -33,12 +33,9 @@ const ResetPassword = ({ history }) => {
   const ResetPassword = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(
-        `http://localhost:2000/users/reset-password/${uuid.slice(1)}`,
-        {
-          password: password,
-        }
-      );
+      await axios.patch(`http://localhost:2000/users/reset-password/${uuid}`, {
+        password: password,
+      });
       history.push(`${process.env.PUBLIC_URL}/reset-password-success`);
     } catch (error) {
       if (error.response) {

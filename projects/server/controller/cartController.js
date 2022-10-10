@@ -1,11 +1,7 @@
 import Cart from "../models/CartModel.js";
 import Products from "../models/ProductModel.js";
 import Category from "../models/CategoryModel.js";
-import Users from "../models/UserModel.js";
 import Address from "../models/AddressModel.js";
-import InvoiceHeader from "../models/InvoiceHeaderModel.js";
-import { use } from "bcrypt/promises.js";
-import InvoiceDetail from "../models/InvoiceDetailModel.js";
 
 export const addToCart = async (req, res) => {
   const { product_id, user_id, qty } = req.body;
@@ -137,25 +133,11 @@ export const checkOutCart = async (req, res) => {
     const emptyAddress = address.length === 0;
 
     if (!emptyAddress) {
-      // const addInvoicesHeader = await InvoiceHeader.create({
-      //   // include: [{ model: InvoiceDetail }],
-      //   invoice_id,
-      //   user_id,
-      //   grand_total,
-      //   address_id,
-      //   status,
-      // });
-      // const addInvoiceDetail = await InvoiceDetail.create({
-      //   price,
-      //   qty,
-      //   invoice_id,
-      //   product_id,
-      // });
-      // const emptyCart = await Cart.destroy({
-      //   where: {
-      //     user_id,
-      //   },
-      // });
+      const emptyCart = await Cart.destroy({
+        where: {
+          user_id,
+        },
+      });
     }
 
     res

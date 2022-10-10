@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  addInvoiceHeaders,
   getInvoiceById,
   getInvoiceHeaders,
   getInvoicesByUserId,
@@ -8,6 +9,7 @@ import {
 
 const routers = express.Router();
 
+routers.post("/addInvoiceHeaders", addInvoiceHeaders);
 routers.get("/getInvoiceById/:id", getInvoiceById);
 routers.post("/getInvoiceHeaders", getInvoiceHeaders);
 routers.post("/getInvoicesByUserId", getInvoicesByUserId);

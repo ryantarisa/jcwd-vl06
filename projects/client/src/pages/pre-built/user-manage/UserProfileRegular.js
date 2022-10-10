@@ -17,11 +17,15 @@ import {
 } from "../../../components/Component";
 import { countryOptions, userData } from "./UserData";
 import { getDateStructured } from "../../../utils/Utils";
+import axios from "axios";
+import { API_URL } from "../../../constants/API";
 
 const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
   const user = JSON.parse(window.localStorage.getItem("profile"));
   const userAddress = JSON.parse(window.localStorage.getItem("address"));
 
+  const [address, setAddress] = useState([]);
+  const [addressData, setAddressData] = useState();
   const [modalTab, setModalTab] = useState("1");
   const [userInfo, setUserInfo] = useState(userData[0]);
   const [formData, setFormData] = useState({
@@ -42,6 +46,7 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
 
   const onInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setAddressData();
   };
 
   const submitForm = () => {
@@ -52,6 +57,40 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
     setModal(false);
   };
 
+  //GET ALL ADDRESS
+  const getAllAddress = async () => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/address/get-address/${user.id}`
+      );
+
+      setAddress(response.data.response);
+      // console.log(response.data.response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // ADD NEW ADDRESS
+  const addNewAddress = async () => {
+    try {
+      const response = await axios.post(`${API_URL}/address/add-address`, {
+        name: addressData.name,
+        address: addressData.address,
+        user_id: user.id,
+      });
+
+      setAddress(response.data.response);
+      // console.log(response.data.response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllAddress();
+  }, []);
+
   return (
     <React.Fragment>
       <Head title="User List - Profile"></Head>
@@ -60,12 +99,17 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
           <BlockHeadContent>
             <BlockTitle tag="h4">Personal Information</BlockTitle>
             <BlockDes>
-              <p>Basic info, like your name and address, that you use on Ramu Website.</p>
+              <p>
+                Basic info, like your name and address, that you use on Ramu
+                Website.
+              </p>
             </BlockDes>
           </BlockHeadContent>
           <BlockHeadContent className="align-self-start d-lg-none">
             <Button
-              className={`toggle btn btn-icon btn-trigger mt-n1 ${sm ? "active" : ""}`}
+              className={`toggle btn btn-icon btn-trigger mt-n1 ${
+                sm ? "active" : ""
+              }`}
               onClick={() => updateSm(!sm)}
             >
               <Icon name="menu-alt-r"></Icon>
@@ -158,65 +202,14 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
             </div>
           </div>
         </div>
-        {/* <div className="nk-data data-list">
-          <div className="data-head">
-            <h6 className="overline-title">Preferences</h6>
-          </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">Language</span>
-              <span className="data-value">English (United State)</span>
-            </div>
-            <div className="data-col data-col-end">
-              <a
-                href="#language"
-                onClick={(ev) => {
-                  ev.preventDefault();
-                }}
-                className="link link-primary"
-              >
-                Change Language
-              </a>
-            </div>
-          </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">Date Format</span>
-              <span className="data-value">MM/DD/YYYY</span>
-            </div>
-            <div className="data-col data-col-end">
-              <a
-                href="#link"
-                onClick={(ev) => {
-                  ev.preventDefault();
-                }}
-                className="link link-primary"
-              >
-                Change
-              </a>
-            </div>
-          </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">Timezone</span>
-              <span className="data-value">Bangladesh (GMT +6)</span>
-            </div>
-            <div className="data-col data-col-end">
-              <a
-                href="#link"
-                onClick={(ev) => {
-                  ev.preventDefault();
-                }}
-                className="link link-primary"
-              >
-                Change
-              </a>
-            </div>
-          </div>
-        </div> */}
       </Block>
 
-      <Modal isOpen={modal} className="modal-dialog-centered" size="lg" toggle={() => setModal(false)}>
+      <Modal
+        isOpen={modal}
+        className="modal-dialog-centered"
+        size="lg"
+        toggle={() => setModal(false)}
+      >
         <ModalBody>
           <a
             href="#dropdownitem"
@@ -230,19 +223,10 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
           </a>
           <div className="p-2">
             <h5 className="title">Update Address</h5>
-            <ul style={{ justifyContent: "space-between" }} className="nk-nav nav nav-tabs">
-              {/* <li className="nav-item">
-                <a
-                  className={`nav-link ${modalTab === "1" && "active"}`}
-                  onClick={(ev) => {
-                    ev.preventDefault();
-                    setModalTab("1");
-                  }}
-                  href="#personal"
-                >
-                  Personal
-                </a>
-              </li> */}
+            <ul
+              style={{ justifyContent: "space-between" }}
+              className="nk-nav nav nav-tabs"
+            >
               <li className="nav-item">
                 <a
                   className={`nav-link ${modalTab === "1" && "active"}`}
@@ -256,232 +240,111 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                 </a>
               </li>
               <li>
-                <Button style={{ marginTop: "15px" }} color="primary" size="sm" onClick={() => submitForm()}>
+                <Button
+                  style={{ marginTop: "15px" }}
+                  color="primary"
+                  size="sm"
+                  onClick={() => submitForm()}
+                >
                   Add address
                 </Button>
               </li>
             </ul>
-            <div className="tab-content">
-              {/* <div className={`tab-pane ${modalTab === "1" ? "active" : ""}`} id="personal">
-                <Row className="gy-4">
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="full-name">
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        id="full-name"
-                        className="form-control"
-                        name="name"
-                        onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.name}
-                        placeholder="Enter Full name"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="display-name">
-                        Display Name
-                      </label>
-                      <input
-                        type="text"
-                        id="display-name"
-                        className="form-control"
-                        name="displayName"
-                        onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.displayName}
-                        placeholder="Enter display name"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="phone-no">
-                        Phone Number
-                      </label>
-                      <input
-                        type="number"
-                        id="phone-no"
-                        className="form-control"
-                        name="phone"
-                        onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.phone}
-                        placeholder="Phone Number"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="birth-day">
-                        Date of Birth
-                      </label>
-                      <DatePicker
-                        selected={new Date(formData.dob)}
-                        className="form-control"
-                        onChange={(date) => setFormData({ ...formData, dob: getDateStructured(date) })}
-                        maxDate={new Date()}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col size="12">
-                    <div className="custom-control custom-switch">
-                      <input type="checkbox" className="custom-control-input form-control" id="latest-sale" />
-                      <label className="custom-control-label" htmlFor="latest-sale">
-                        Use full name to display{" "}
-                      </label>
+
+            {address.length > 0
+              ? address.map((item) => {
+                  return (
+                    <div key={address.id} className="tab-content">
+                      <div
+                        className={`tab-pane ${
+                          modalTab === "1" ? "active" : ""
+                        }`}
+                        id="address"
+                      >
+                        <Row className="gy-1">
+                          <Col md="6">
+                            <FormGroup>
+                              <label className="form-label">
+                                Address Name:
+                              </label>
+                              <br></br>
+                              <span>
+                                {""} {item.name}
+                              </span>
+                              {/* <input
+                                value={item.name}
+                                type="text"
+                                id="address-l1"
+                                name="address"
+                                onChange={(e) => onInputChange(e)}
+                                defaultValue={formData.address}
+                                className="form-control"
+                              /> */}
+                            </FormGroup>
+                          </Col>
+                          <Col md="6">
+                            <FormGroup>
+                              <label className="form-label">
+                                Full Address:
+                              </label>
+                              <br></br>
+                              <span>
+                                {""} {item.address}
+                              </span>
+                              {/* <input
+                                value={item.address}
+                                type="text"
+                                id="address-l2"
+                                name="address2"
+                                onChange={(e) => onInputChange(e)}
+                                defaultValue={formData.address2}
+                                className="form-control"
+                              /> */}
+                            </FormGroup>
+                          </Col>
+                          <Col size="12">
+                            <ul
+                              className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2"
+                              style={{ justifyContent: "space-between" }}
+                            >
+                              {userAddress[0].id === item.id ? (
+                                <li className={`text-primary`}>
+                                  Main Address{" "}
+                                  <Icon name={`check-circle`}></Icon>
+                                </li>
+                              ) : (
+                                <li>
+                                  <Button
+                                    color="primary"
+                                    size="sm"
+                                    onClick={() => submitForm()}
+                                  >
+                                    Set as main
+                                  </Button>
+                                </li>
+                              )}
+
+                              <li style={{ color: "red", cursor: "pointer" }}>
+                                <a
+                                  onClick={(ev) => {
+                                    ev.preventDefault();
+                                    setModalTab("1");
+                                  }}
+                                >
+                                  Delete
+                                </a>
+                              </li>
+                            </ul>
+                          </Col>
+                          <Col md="12">
+                            <hr style={{ paddingTop: "10px" }}></hr>
+                          </Col>
+                        </Row>
+                      </div>
                     </div>
-                  </Col>
-                  <Col size="12">
-                    <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                      <li>
-                        <Button
-                          color="primary"
-                          size="lg"
-                          onClick={(ev) => {
-                            ev.preventDefault();
-                            submitForm();
-                          }}
-                        >
-                          Update Profile
-                        </Button>
-                      </li>
-                      <li>
-                        <a
-                          href="#dropdownitem"
-                          onClick={(ev) => {
-                            ev.preventDefault();
-                            setModal(false);
-                          }}
-                          className="link link-light"
-                        >
-                          Cancel
-                        </a>
-                      </li>
-                    </ul>
-                  </Col>
-                </Row>
-              </div> */}
-              <div className={`tab-pane ${modalTab === "1" ? "active" : ""}`} id="address">
-                <Row className="gy-4">
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="address-l1">
-                        Address Name
-                      </label>
-                      <input
-                        type="text"
-                        id="address-l1"
-                        name="address"
-                        onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.address}
-                        className="form-control"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="address-l2">
-                        Full Address
-                      </label>
-                      <input
-                        type="text"
-                        id="address-l2"
-                        name="address2"
-                        onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.address2}
-                        className="form-control"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col size="12">
-                    <ul
-                      className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2"
-                      style={{ justifyContent: "space-between" }}
-                    >
-                      <li>
-                        <Button color="primary" size="md" onClick={() => submitForm()}>
-                          Set as main
-                        </Button>
-                      </li>
-                      {/* <li>
-                        Main Address <Icon className={`text-succes`} name={`check-circle`}></Icon>
-                      </li> */}
-                      <li style={{ color: "red", cursor: "pointer" }}>
-                        <a
-                          onClick={(ev) => {
-                            ev.preventDefault();
-                            setModalTab("1");
-                          }}
-                        >
-                          Delete
-                        </a>
-                      </li>
-                    </ul>
-                  </Col>
-                  {/* <Col md="12">
-                    <FormGroup>
-                      <hr />
-                    </FormGroup>
-                  </Col> */}
-                  {/* <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="address-st">
-                        State
-                      </label>
-                      <input
-                        type="text"
-                        id="address-st"
-                        name="state"
-                        onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.state}
-                        className="form-control"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="address-county">
-                        Country
-                      </label>
-                      <RSelect
-                        options={countryOptions}
-                        placeholder="Select a country"
-                        defaultValue={[
-                          {
-                            value: formData.country,
-                            label: formData.country,
-                          },
-                        ]}
-                        onChange={(e) => setFormData({ ...formData, country: e.value })}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col size="12">
-                    <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                      <li>
-                        <Button color="primary" size="lg" onClick={() => submitForm()}>
-                          Update Address
-                        </Button>
-                      </li>
-                      <li>
-                        <a
-                          href="#dropdownitem"
-                          onClick={(ev) => {
-                            ev.preventDefault();
-                            setModal(false);
-                          }}
-                          className="link link-light"
-                        >
-                          Cancel
-                        </a>
-                      </li>
-                    </ul>
-                  </Col> */}
-                </Row>
-              </div>
-            </div>
+                  );
+                })
+              : null}
           </div>
         </ModalBody>
       </Modal>
