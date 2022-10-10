@@ -40,7 +40,7 @@ export const sendOrderNotif = async (req, res) => {
     };
     let subTotal = 0;
     await result.invoice_details.forEach((item) => {
-      subTotal += item.price;
+      subTotal += item.price * item.qty;
       data.items += `<tr>
                         <td class="service">${
                           result.invoice_details.indexOf(item) + 1
@@ -80,7 +80,7 @@ export const sendOrderNotif = async (req, res) => {
     transporter.use("compile", hbs(handlebarOptions));
     transporter.sendMail(mail);
 
-    res.status(200).send(result);
+    res.status(200).send(true);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
