@@ -26,13 +26,20 @@ function useQuery() {
 const InvoiceDetailsAdm = () => {
   let query = useQuery();
   const { id } = useParams();
-  const [invoice, setInvoice] = useState({ user: {}, invoice_details: [], address: {} });
+  const [invoice, setInvoice] = useState({
+    user: {},
+    invoice_details: [],
+    address: {},
+  });
+  let subTotal = 0;
 
   const userId = query.get("userId");
 
   const getInvoice = async () => {
     try {
-      const response = await axios.get(`${API_URL}/invoices/getInvoiceById/${id}`);
+      const response = await axios.get(
+        `${API_URL}/invoices/getInvoiceById/${id}`
+      );
       setInvoice(response.data);
     } catch (error) {
       console.log(error);
@@ -49,15 +56,11 @@ const InvoiceDetailsAdm = () => {
     return locale.format(data);
   };
 
-  // DATE FORMATING
-  const formatDate = (date, format) => {
-    return moment(date).format(format);
-  };
-
   const renderInvoiceDetails = () => {
     let numb = 0;
     return invoice.invoice_details.map((item) => {
       numb += 1;
+      subTotal += item.price * item.qty;
       return (
         <tr key={item.id}>
           <td>{numb}</td>
@@ -83,22 +86,37 @@ const InvoiceDetailsAdm = () => {
             <BlockBetween className="g-3">
               <BlockHeadContent>
                 <BlockTitle>
-                  Invoice <strong className="text-primary small">#{invoice.invoice_id}</strong>
+                  Invoice{" "}
+                  <strong className="text-primary small">
+                    #{invoice.invoice_id}
+                  </strong>
                 </BlockTitle>
                 <BlockDes className="text-soft">
                   <ul className="">
                     <li>
                       Created At:
-                      <span className="text-base"> {formatDate(invoice.createdAt, "DD MMM YYYY, h:mm a")}</span>
+                      <span className="text-base">
+                        {moment(invoice.createdAt).format(
+                          "DD MMM YYYY, h:mm a"
+                        )}
+                      </span>
                     </li>
                   </ul>
                 </BlockDes>
               </BlockHeadContent>
               <BlockHeadContent>
                 <Link
-                  to={userId ? `/admin/user-transactions/${userId}` : `${process.env.PUBLIC_URL}/admin/transactions`}
+                  to={
+                    userId
+                      ? `/admin/user-transactions/${userId}`
+                      : `${process.env.PUBLIC_URL}/admin/transactions`
+                  }
                 >
-                  <Button color="light" outline className="bg-white d-none d-sm-inline-flex">
+                  <Button
+                    color="light"
+                    outline
+                    className="bg-white d-none d-sm-inline-flex"
+                  >
                     <Icon name="arrow-left"></Icon>
                     <span>Back</span>
                   </Button>
@@ -110,8 +128,16 @@ const InvoiceDetailsAdm = () => {
           <Block>
             <div className="invoice">
               <div className="invoice-action">
-                <Link to={`${process.env.PUBLIC_URL}/invoice-print/${id}`} target="_blank">
-                  <Button size="lg" color="primary" outline className="btn-icon btn-white btn-dim">
+                <Link
+                  to={`${process.env.PUBLIC_URL}/invoice-print/${id}`}
+                  target="_blank"
+                >
+                  <Button
+                    size="lg"
+                    color="primary"
+                    outline
+                    className="btn-icon btn-white btn-dim"
+                  >
                     <Icon name="printer-fill"></Icon>
                   </Button>
                 </Link>
@@ -144,10 +170,14 @@ const InvoiceDetailsAdm = () => {
                     <h3 className="title">Invoice</h3>
                     <ul className="list-plain">
                       <li className="invoice-id">
-                        <span>Invoice ID</span>:<span>{invoice.invoice_id}</span>
+                        <span>Invoice ID</span>:
+                        <span>{invoice.invoice_id}</span>
                       </li>
                       <li className="invoice-date">
-                        <span>Date</span>:<span>{formatDate(invoice.createdAt, "DD MMM YYYY")}</span>
+                        <span>Date</span>:
+                        <span>
+                          {moment(invoice.createdAt).format("DD MMM YYYY")}
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -169,28 +199,29 @@ const InvoiceDetailsAdm = () => {
                       <tfoot>
                         <tr>
                           <td colSpan="2"></td>
-                          <td colSpan="2">Total</td>
-                          <td>{toCurrency(invoice.grand_total)}</td>
+                          <td colSpan="2">Sub Total</td>
+                          <td>{toCurrency(subTotal)}</td>
                         </tr>
-                        {/* <tr>
+                        <tr>
                           <td colSpan="2"></td>
-                          <td colSpan="2">Processing fee</td>
-                          <td>$10.00</td>
-                        </tr> */}
+                          <td colSpan="2">Shipping</td>
+                          <td>{toCurrency(invoice.grand_total - subTotal)}</td>
+                        </tr>
                         {/* <tr>
                           <td colSpan="2"></td>
                           <td colSpan="2">TAX(2%)</td>
                           <td>{toCurrency(invoice.grand_total * (2 / 100))}</td>
-                        </tr>
+                        </tr> */}
                         <tr>
                           <td colSpan="2"></td>
                           <td colSpan="2">Grand Total</td>
-                          <td>{toCurrency(invoice.grand_total + invoice.grand_total * (2 / 100))}</td>
-                        </tr> */}
+                          <td>{toCurrency(invoice.grand_total)}</td>
+                        </tr>
                       </tfoot>
                     </table>
                     <div className="nk-notes ff-italic fs-12px text-soft">
-                      Invoice was created on a computer and is valid without the signature and seal.
+                      Invoice was created on a computer and is valid without the
+                      signature and seal.
                     </div>
                   </div>
                 </div>

@@ -41,21 +41,24 @@ const InvoiceList = () => {
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemPerPage, setItemPerPage] = useState(3);
+  const [itemPerPage, setItemPerPage] = useState(10);
   const [asc, setAsc] = useState(false);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const getInvoices = async (page) => {
     try {
-      const response = await axios.post(`${API_URL}/invoices/getInvoiceHeaders`, {
-        page,
-        perPage: itemPerPage,
-        invoice_id: onSearchText,
-        asc,
-        startDate,
-        endDate,
-      });
+      const response = await axios.post(
+        `${API_URL}/invoices/getInvoiceHeaders`,
+        {
+          page,
+          perPage: itemPerPage,
+          invoice_id: onSearchText,
+          asc,
+          startDate,
+          endDate,
+        }
+      );
       setInvoices(response.data.invoices);
       setTotalInvoices(response.data.count);
     } catch (error) {
@@ -65,7 +68,10 @@ const InvoiceList = () => {
 
   const btnChangeStatus = async (status) => {
     try {
-      await axios.patch(`${API_URL}/invoices/setStatus`, { id: item.id, status });
+      await axios.patch(`${API_URL}/invoices/setStatus`, {
+        id: item.id,
+        status,
+      });
       getInvoices(currentPage);
       setModalIsOpen(false);
     } catch (error) {
@@ -169,7 +175,10 @@ const InvoiceList = () => {
                   <div className="card-tools mr-n1">
                     <ul className="btn-toolbar">
                       <li>
-                        <Button onClick={toggle} className="btn-icon search-toggle toggle-search">
+                        <Button
+                          onClick={toggle}
+                          className="btn-icon search-toggle toggle-search"
+                        >
                           <Icon name="search"></Icon>
                         </Button>
                       </li>
@@ -177,7 +186,9 @@ const InvoiceList = () => {
                       <li className="btn-toolbar-sep"></li>
                       <li style={{ width: "210px" }}>
                         <DatePicker
-                          placeholderText={moment(new Date().getTime()).format("MM/DD/yyyy")}
+                          placeholderText={moment(new Date().getTime()).format(
+                            "MM/DD/yyyy"
+                          )}
                           startDate={startDate}
                           onChange={(update) => {
                             setDateRange(update);
@@ -192,7 +203,10 @@ const InvoiceList = () => {
 
                       <li>
                         <UncontrolledDropdown>
-                          <DropdownToggle tag="a" className="dropdown-toggle btn btn-icon btn-trigger ml-2">
+                          <DropdownToggle
+                            tag="a"
+                            className="dropdown-toggle btn btn-icon btn-trigger ml-2"
+                          >
                             <Icon name="setting"></Icon>
                           </DropdownToggle>
                           <DropdownMenu right>
@@ -200,14 +214,26 @@ const InvoiceList = () => {
                               <li>
                                 <span>Show(per page)</span>
                               </li>
-                              <li className={itemPerPage === 3 ? "active" : ""}>
-                                <DropdownItem tag="a" href="#dropdownitem" onClick={() => setPerPage(3)}>
-                                  3 items
+                              <li
+                                className={itemPerPage === 10 ? "active" : ""}
+                              >
+                                <DropdownItem
+                                  tag="a"
+                                  href="#dropdownitem"
+                                  onClick={() => setPerPage(10)}
+                                >
+                                  10 items
                                 </DropdownItem>
                               </li>
-                              <li className={itemPerPage === 5 ? "active" : ""}>
-                                <DropdownItem tag="a" href="#dropdownitem" onClick={() => setPerPage(5)}>
-                                  5 items
+                              <li
+                                className={itemPerPage === 15 ? "active" : ""}
+                              >
+                                <DropdownItem
+                                  tag="a"
+                                  href="#dropdownitem"
+                                  onClick={() => setPerPage(15)}
+                                >
+                                  15 items
                                 </DropdownItem>
                               </li>
                             </ul>
@@ -216,12 +242,18 @@ const InvoiceList = () => {
                                 <span>Order(by date)</span>
                               </li>
                               <li className={asc ? "" : "active"}>
-                                <DropdownItem tag="a" onClick={() => orderByDate(false)}>
+                                <DropdownItem
+                                  tag="a"
+                                  onClick={() => orderByDate(false)}
+                                >
                                   DESC
                                 </DropdownItem>
                               </li>
                               <li className={asc ? "active" : ""}>
-                                <DropdownItem tag="a" onClick={() => orderByDate(true)}>
+                                <DropdownItem
+                                  tag="a"
+                                  onClick={() => orderByDate(true)}
+                                >
                                   ASC
                                 </DropdownItem>
                               </li>
@@ -232,7 +264,11 @@ const InvoiceList = () => {
                     </ul>
                   </div>
 
-                  <div className={`card-search search-wrap ${!onSearch ? "active" : ""}`}>
+                  <div
+                    className={`card-search search-wrap ${
+                      !onSearch ? "active" : ""
+                    }`}
+                  >
                     <div className="search-content">
                       <input
                         type="text"
@@ -265,7 +301,9 @@ const InvoiceList = () => {
                     <tr className="tb-odr-item">
                       <th className="tb-odr-info">
                         <span className="tb-odr-id">ID</span>
-                        <span className="tb-odr-date d-none d-md-inline-block">Date</span>
+                        <span className="tb-odr-date d-none d-md-inline-block">
+                          Date
+                        </span>
                       </th>
                       <th className="tb-odr-info">
                         <span className="tb-odr-id">Customer</span>
@@ -275,7 +313,9 @@ const InvoiceList = () => {
                       </th>
                       <th className="tb-odr-amount">
                         <span className="tb-odr-total">Amount</span>
-                        <span className="tb-odr-status d-none d-md-inline-block">Status</span>
+                        <span className="tb-odr-status d-none d-md-inline-block">
+                          Status
+                        </span>
                       </th>
                       <th className="tb-odr-info">
                         <span className="tb-odr-id">Payment</span>
@@ -291,10 +331,16 @@ const InvoiceList = () => {
                             <tr className="tb-odr-item" key={item.id}>
                               <td className="tb-odr-info">
                                 <span className="tb-odr-id">
-                                  <Link to={`/admin/invoice-details/${item.invoice_id}`}>{item.invoice_id}</Link>
+                                  <Link
+                                    to={`/admin/invoice-details/${item.invoice_id}`}
+                                  >
+                                    {item.invoice_id}
+                                  </Link>
                                 </span>
                                 <span className="tb-odr-date">
-                                  {moment(item.createdAt).format("M-DD-YYYY, h:mm a")}
+                                  {moment(item.createdAt).format(
+                                    "M-DD-YYYY, h:mm a"
+                                  )}
                                 </span>
                               </td>
 
@@ -314,16 +360,20 @@ const InvoiceList = () => {
 
                               <td className="tb-odr-amount">
                                 <span className="tb-odr-total">
-                                  <span className="amount">{toCurrency(item.grand_total)}</span>
+                                  <span className="amount">
+                                    {toCurrency(item.grand_total)}
+                                  </span>
                                 </span>
                                 <span className="tb-odr-status">
                                   <Badge
                                     color={
-                                      item.status === "Paid"
+                                      item.status === "Completed"
                                         ? "success"
-                                        : item.status === "Waiting for payment"
+                                        : item.status === "Canceled"
+                                        ? "danger"
+                                        : item.status === "Processing Order"
                                         ? "warning"
-                                        : "danger"
+                                        : "grey"
                                     }
                                     className="badge-dot"
                                   >
@@ -357,8 +407,14 @@ const InvoiceList = () => {
                                       <Icon name="printer-fill"></Icon>
                                     </Button>
                                   </Link> */}
-                                  <Link to={`/admin/invoice-details/${item.invoice_id}`}>
-                                    <Button color="primary" size="sm" className="btn btn-dim">
+                                  <Link
+                                    to={`/admin/invoice-details/${item.invoice_id}`}
+                                  >
+                                    <Button
+                                      color="primary"
+                                      size="sm"
+                                      className="btn btn-dim"
+                                    >
                                       View
                                     </Button>
                                   </Link>
@@ -425,51 +481,89 @@ const InvoiceList = () => {
                 <Row className="gy-3">
                   <Col lg={6}>
                     <img
-                      src={item.payment_confirmation && `${API_URL}/payments/${item.payment_confirmation.image}`}
+                      src={
+                        item.payment_confirmation &&
+                        `${API_URL}/payments/${item.payment_confirmation.image}`
+                      }
                       alt="payment"
                     />
                   </Col>
                   <Col lg={6}>
-                    <div className="invoice-desc">
+                    <div className="w-100 invoice-desc">
                       <ul className="list-plain">
                         <li>
-                          <span>Bank</span>:<span>{item.payment_confirmation && item.payment_confirmation.bank}</span>
+                          <span>Bank</span>:
+                          <span>
+                            {item.payment_confirmation &&
+                              item.payment_confirmation.bank}
+                          </span>
                         </li>
                         <li>
                           <span>Account</span>:
-                          <span>{item.payment_confirmation && item.payment_confirmation.account_name}</span>
+                          <span>
+                            {item.payment_confirmation &&
+                              item.payment_confirmation.account_name}
+                          </span>
                         </li>
                         <li>
                           <span>Amount</span>:
-                          <span>{item.payment_confirmation && toCurrency(item.payment_confirmation.amount)}</span>
+                          <span>
+                            {item.payment_confirmation &&
+                              toCurrency(item.payment_confirmation.amount)}
+                          </span>
                         </li>
+                        <li>
+                          <span>Status</span>:
+                          {item.status === "Completed" ? (
+                            <span className="text-success">{item.status}</span>
+                          ) : item.status === "Canceled" ? (
+                            <span className="text-danger">{item.status}</span>
+                          ) : (
+                            <span className="text-warning">{item.status}</span>
+                          )}
+                        </li>
+                        {item.status === "Waiting for payment" ? (
+                          <li>
+                            <span>Action</span>:
+                            <span>
+                              <Button
+                                onClick={() =>
+                                  btnChangeStatus("Processing Order")
+                                }
+                                color="primary"
+                                size="sm"
+                                className="btn btn-dim mr-2"
+                              >
+                                Approve
+                              </Button>
+                              <Button
+                                onClick={() => btnChangeStatus("Canceled")}
+                                color="danger"
+                                size="sm"
+                                className="btn btn-dim"
+                              >
+                                Reject
+                              </Button>
+                            </span>
+                          </li>
+                        ) : null}
+                        {item.status === "Processing Order" ? (
+                          <li>
+                            <span>Action</span>:
+                            <span>
+                              <Button
+                                onClick={() => btnChangeStatus("Completed")}
+                                color="primary"
+                                size="sm"
+                                className="btn btn-dim mr-2"
+                              >
+                                Complete
+                              </Button>
+                            </span>
+                          </li>
+                        ) : null}
                       </ul>
                     </div>
-
-                    {item.status === "Waiting for payment" ? (
-                      <div className=" justify-content-end mt-3">
-                        <Button
-                          onClick={() => btnChangeStatus("Paid")}
-                          color="primary"
-                          size="sm"
-                          className="btn btn-dim mr-2"
-                        >
-                          Approve
-                        </Button>
-                        <Button
-                          onClick={() => btnChangeStatus("Rejected")}
-                          color="danger"
-                          size="sm"
-                          className="btn btn-dim"
-                        >
-                          Reject
-                        </Button>
-                      </div>
-                    ) : item.status === "Paid" ? (
-                      <span className="text-success">{item.status}</span>
-                    ) : (
-                      <span className="text-danger">{item.status}</span>
-                    )}
                   </Col>
                 </Row>
               </div>
