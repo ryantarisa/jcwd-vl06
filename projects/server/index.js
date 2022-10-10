@@ -13,6 +13,8 @@ import addressRouter from "./routes/addressRoute.js";
 import bearerToken from "express-bearer-token";
 import path from "path";
 import { fileURLToPath } from "url";
+import InvoiceDetailRouter from "./routes/invoiceDetailRouter.js";
+import PaymentRouter from "./routes/paymentRoute.js";
 // import Address from "./models/AddressModel.js";
 dotenv.config();
 
@@ -51,9 +53,11 @@ app.use(UserRoute);
 app.use("/admin", adminRouter);
 app.use("/products", productRouter);
 app.use("/invoices", invoiceHeaderRouter);
+app.use("/invoices", InvoiceDetailRouter);
 app.use("/cart", cartRouter);
 app.use("/report", reportRouter);
 app.use("/address", addressRouter);
+app.use("/payment", PaymentRouter);
 
 // running backend
 app.listen(process.env.APP_PORT, () => {

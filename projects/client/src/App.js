@@ -37,7 +37,6 @@ const App = () => {
   useEffect(() => {
     const token = localStorage.getItem("adminAccess");
     if (token) {
-      // const userData = JSON.parse(userLocalStorage);
       dispatch(adminKeepLogin(token));
     } else {
       dispatch(checkStorage());
@@ -50,18 +49,42 @@ const App = () => {
         {/* Auth Pages */}
         <Route exact path={`/auth-success`} component={Success}></Route>
         <Route exact path={`/auth-reset`} component={ForgotPassword}></Route>
-        <Route exact path={`/adm/forgot-password`} component={ForgotPasswordAdm}></Route>
-        <Route exact path={`/reset-mail-sent`} component={SuccessSendLink}></Route>
-        <Route exact path={`/adm/reset-password/:token`} component={ResetPasswordAdm}></Route>
-        <Route exact path={`/reset-password/:uuid`} component={ResetPassword}></Route>
-        <Route exact path={`/reset-password-success`} component={SuccessResetPass}></Route>
+        <Route
+          exact
+          path={`/adm/forgot-password`}
+          component={ForgotPasswordAdm}
+        ></Route>
+        <Route
+          exact
+          path={`/reset-mail-sent`}
+          component={SuccessSendLink}
+        ></Route>
+        <Route
+          exact
+          path={`/adm/reset-password/:token`}
+          component={ResetPasswordAdm}
+        ></Route>
+        <Route
+          exact
+          path={`/reset-password/:uuid`}
+          component={ResetPassword}
+        ></Route>
+        <Route
+          exact
+          path={`/reset-password-success`}
+          component={SuccessResetPass}
+        ></Route>
         <Route exact path={`/auth-register`} component={Register}></Route>
         <Route exact path={`/adm`} component={LoginAdm}></Route>
         <Route exact path={`/auth-login`} component={Login}></Route>
         <Route exact path={`/failed-login`} component={FailedLogin}></Route>
 
         {/* Print Pages */}
-        <Route exact path={`/invoice-print/:id`} component={InvoicePrint}></Route>
+        <Route
+          exact
+          path={`/invoice-print/:id`}
+          component={InvoicePrint}
+        ></Route>
 
         {/* Helper pages */}
         <Route exact path={`/auths/terms`} component={Terms}></Route>
@@ -70,12 +93,32 @@ const App = () => {
         <Route exact path={`/invoice-print`} component={InvoicePrint}></Route>
 
         {/*Error Pages*/}
-        <Route exact path={`/errors/404-classic`} component={Error404Classic}></Route>
-        <Route exact path={`/errors/504-modern`} component={Error504Modern}></Route>
-        <Route exact path={`/errors/404-modern`} component={Error404Modern}></Route>
-        <Route exact path={`/errors/504-classic`} component={Error504Classic}></Route>
+        <Route
+          exact
+          path={`/errors/404-classic`}
+          component={Error404Classic}
+        ></Route>
+        <Route
+          exact
+          path={`/errors/504-modern`}
+          component={Error504Modern}
+        ></Route>
+        <Route
+          exact
+          path={`/errors/404-modern`}
+          component={Error404Modern}
+        ></Route>
+        <Route
+          exact
+          path={`/errors/504-classic`}
+          component={Error504Classic}
+        ></Route>
 
-        <Route exact path={`/admin-verification/:token`} component={VerifiedAdm}></Route>
+        <Route
+          exact
+          path={`/admin-verification/:token`}
+          component={VerifiedAdm}
+        ></Route>
 
         {/*Main Routes*/}
         <PrivateRoute exact path="" component={Layout}></PrivateRoute>

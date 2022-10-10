@@ -45,8 +45,11 @@ const Login = () => {
         email: email,
         password: password,
       });
+      console.log(response.data);
 
-      const address = await axios.get(`http://localhost:2000/address/get-address/${response.data.id}`);
+      const address = await axios.get(
+        `http://localhost:2000/address/get-address/${response.data.id}`
+      );
 
       // console.log(address.data.response);
 
@@ -54,7 +57,11 @@ const Login = () => {
         localStorage.setItem("profile", JSON.stringify(response.data));
         localStorage.setItem(
           "address",
-          JSON.stringify(address.data.response.length === 0 ? defAddress : address.data.response)
+          JSON.stringify(
+            address.data.response.length === 0
+              ? defAddress
+              : address.data.response
+          )
         );
         const user = JSON.parse(window.localStorage.getItem("profile"));
 
@@ -69,7 +76,11 @@ const Login = () => {
             window.history.pushState(
               `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
               "auth-login",
-              `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/failed-login"}`
+              `${
+                process.env.PUBLIC_URL
+                  ? process.env.PUBLIC_URL
+                  : "/failed-login"
+              }`
             );
           }
           window.location.reload();
@@ -92,8 +103,16 @@ const Login = () => {
         <Block className="nk-block-middle nk-auth-body  wide-xs">
           <div className="brand-logo pb-4 text-center">
             <Link to={process.env.PUBLIC_URL + "/"} className="logo-link">
-              <img className="logo-light logo-img logo-img-lg" src={Logo} alt="logo" />
-              <img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" />
+              <img
+                className="logo-light logo-img logo-img-lg"
+                src={Logo}
+                alt="logo"
+              />
+              <img
+                className="logo-dark logo-img logo-img-lg"
+                src={LogoDark}
+                alt="logo-dark"
+              />
             </Link>
           </div>
 
@@ -131,7 +150,9 @@ const Login = () => {
                     placeholder="Enter your email"
                     className="form-control-lg form-control"
                   />
-                  {errors.name && <span className="invalid">{errors.name.message}</span>}
+                  {errors.name && (
+                    <span className="invalid">{errors.name.message}</span>
+                  )}
                 </div>
               </FormGroup>
               <FormGroup>
@@ -139,7 +160,10 @@ const Login = () => {
                   <label className="form-label" htmlFor="password">
                     Password
                   </label>
-                  <Link className="link link-primary link-sm" to={`/auth-reset`}>
+                  <Link
+                    className="link link-primary link-sm"
+                    to={`/auth-reset`}
+                  >
                     Forgot Password?
                   </Link>
                 </div>
@@ -150,11 +174,16 @@ const Login = () => {
                       ev.preventDefault();
                       setPassState(!passState);
                     }}
-                    className={`form-icon lg form-icon-right passcode-switch ${passState ? "is-hidden" : "is-shown"}`}
+                    className={`form-icon lg form-icon-right passcode-switch ${
+                      passState ? "is-hidden" : "is-shown"
+                    }`}
                   >
                     <Icon name="eye" className="passcode-icon icon-show"></Icon>
 
-                    <Icon name="eye-off" className="passcode-icon icon-hide"></Icon>
+                    <Icon
+                      name="eye-off"
+                      className="passcode-icon icon-hide"
+                    ></Icon>
                   </a>
                   <input
                     type={passState ? "text" : "password"}
@@ -164,20 +193,30 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     ref={register({ required: "This field is required" })}
                     placeholder="Enter your password"
-                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
+                    className={`form-control-lg form-control ${
+                      passState ? "is-hidden" : "is-shown"
+                    }`}
                   />
-                  {errors.passcode && <span className="invalid">{errors.passcode.message}</span>}
+                  {errors.passcode && (
+                    <span className="invalid">{errors.passcode.message}</span>
+                  )}
                 </div>
               </FormGroup>
               <FormGroup>
-                <Button size="lg" className="btn-block" type="submit" color="primary">
+                <Button
+                  size="lg"
+                  className="btn-block"
+                  type="submit"
+                  color="primary"
+                >
                   {loading ? <Spinner size="sm" color="light" /> : "Log In"}
                 </Button>
               </FormGroup>
             </Form>
             <div className="form-note-s2 text-center pt-4">
               {" "}
-              New on our platform? <Link to={`/auth-register`}>Create an account</Link>
+              New on our platform?{" "}
+              <Link to={`/auth-register`}>Create an account</Link>
             </div>
             <div className="text-center pt-4 pb-3">
               <h6 className="overline-title overline-title-sap">

@@ -18,6 +18,7 @@ export const uploader = (dir, fileNamePrefix) => {
     },
 
     filename: (req, file, cb) => {
+      console.log(file.originalname);
       cb(
         null,
         fileNamePrefix + "-" + Date.now() + path.extname(file.originalname)

@@ -28,7 +28,8 @@ const FormLayoutsPage = ({ ...props }) => {
             </BlockTitle>
             <BlockDes>
               <p className="lead">
-                Form is most esential part of your project. We styled out nicely so you can build your form so quickly.
+                Form is most esential part of your project. We styled out nicely
+                so you can build your form so quickly.
               </p>
             </BlockDes>
           </BlockHeadContent>
@@ -53,7 +54,11 @@ const FormLayoutsPage = ({ ...props }) => {
                       Full Name
                     </label>
                     <div className="form-control-wrap">
-                      <input className="form-control" type="text" id="full-name" />
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="full-name"
+                      />
                     </div>
                   </FormGroup>
                   <FormGroup className="form-group">
@@ -61,7 +66,11 @@ const FormLayoutsPage = ({ ...props }) => {
                       Email address
                     </label>
                     <div className="form-control-wrap">
-                      <input className="form-control" type="text" id="email-address" />
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="email-address"
+                      />
                     </div>
                   </FormGroup>
                   <FormGroup className="form-group">
@@ -69,7 +78,11 @@ const FormLayoutsPage = ({ ...props }) => {
                       Phone No
                     </label>
                     <div className="form-control-wrap">
-                      <input className="form-control" type="number" id="phone-no" />
+                      <input
+                        className="form-control"
+                        type="number"
+                        id="phone-no"
+                      />
                     </div>
                   </FormGroup>
                   <FormGroup className="form-group">
@@ -77,24 +90,45 @@ const FormLayoutsPage = ({ ...props }) => {
                     <ul className="custom-control-group g-3 align-center">
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="com-email" />
-                          <label className="custom-control-label" htmlFor="com-email">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="com-email"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="com-email"
+                          >
                             Email
                           </label>
                         </div>
                       </li>
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="com-sms" />
-                          <label className="custom-control-label" htmlFor="com-sms">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="com-sms"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="com-sms"
+                          >
                             SMS
                           </label>
                         </div>
                       </li>
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="com-phone" />
-                          <label className="custom-control-label" htmlFor="com-phone">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="com-phone"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="com-phone"
+                          >
                             Phone
                           </label>
                         </div>
@@ -106,7 +140,11 @@ const FormLayoutsPage = ({ ...props }) => {
                       Amount
                     </label>
                     <div className="form-control-wrap">
-                      <input type="number" id="pay-amount" className="form-control" />
+                      <input
+                        type="number"
+                        id="pay-amount"
+                        className="form-control"
+                      />
                     </div>
                   </FormGroup>
                   <FormGroup className="form-group">
@@ -114,24 +152,45 @@ const FormLayoutsPage = ({ ...props }) => {
                     <ul className="custom-control-group g-3 align-center">
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="pay-card" />
-                          <label className="custom-control-label" htmlFor="pay-card">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="pay-card"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="pay-card"
+                          >
                             Card
                           </label>
                         </div>
                       </li>
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="pay-bitcoin" />
-                          <label className="custom-control-label " htmlFor="pay-bitcoin">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="pay-bitcoin"
+                          />
+                          <label
+                            className="custom-control-label "
+                            htmlFor="pay-bitcoin"
+                          >
                             Bitcoin
                           </label>
                         </div>
                       </li>
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="pay-cash" />
-                          <label className="custom-control-label" htmlFor="pay-cash">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="pay-cash"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="pay-cash"
+                          >
                             Cash
                           </label>
                         </div>
@@ -156,25 +215,41 @@ const FormLayoutsPage = ({ ...props }) => {
                     <label className="form-label" htmlFor="cf-full-name">
                       Full Name
                     </label>
-                    <input type="text" id="cf-full-name" className="form-control" />
+                    <input
+                      type="text"
+                      id="cf-full-name"
+                      className="form-control"
+                    />
                   </FormGroup>
                   <FormGroup className="form-group">
                     <label className="form-label" htmlFor="cf-email-address">
                       Email address
                     </label>
-                    <input type="text" id="cf-email-address" className="form-control" />
+                    <input
+                      type="text"
+                      id="cf-email-address"
+                      className="form-control"
+                    />
                   </FormGroup>
                   <FormGroup className="form-group">
                     <label className="form-label" htmlFor="cf-phone-no">
                       Phone No
                     </label>
-                    <input type="number" id="cf-phone-no" className="form-control" />
+                    <input
+                      type="number"
+                      id="cf-phone-no"
+                      className="form-control"
+                    />
                   </FormGroup>
                   <FormGroup className="form-group">
                     <label className="form-label" htmlFor="cf-subject">
                       Subject
                     </label>
-                    <input type="text" id="cf-subject" className="form-control" />
+                    <input
+                      type="text"
+                      id="cf-subject"
+                      className="form-control"
+                    />
                   </FormGroup>
                   <FormGroup className="form-group">
                     <label className="form-label" htmlFor="cf-default-textarea">
@@ -218,7 +293,11 @@ const FormLayoutsPage = ({ ...props }) => {
                       Full Name
                     </label>
                     <div className="form-control-wrap">
-                      <input type="text" id="full-name-1" className="form-control" />
+                      <input
+                        type="text"
+                        id="full-name-1"
+                        className="form-control"
+                      />
                     </div>
                   </FormGroup>
                 </Col>
@@ -228,7 +307,11 @@ const FormLayoutsPage = ({ ...props }) => {
                       Email address
                     </label>
                     <div className="form-control-wrap">
-                      <input type="text" id="email-address-1" className="form-control" />
+                      <input
+                        type="text"
+                        id="email-address-1"
+                        className="form-control"
+                      />
                     </div>
                   </FormGroup>
                 </Col>
@@ -238,7 +321,11 @@ const FormLayoutsPage = ({ ...props }) => {
                       Phone No
                     </label>
                     <div className="form-control-wrap">
-                      <input type="number" id="phone-no-1" className="form-control" />
+                      <input
+                        type="number"
+                        id="phone-no-1"
+                        className="form-control"
+                      />
                     </div>
                   </FormGroup>
                 </Col>
@@ -248,7 +335,11 @@ const FormLayoutsPage = ({ ...props }) => {
                       Amount
                     </label>
                     <div className="form-control-wrap">
-                      <input type="number" id="pay-amount-1" className="form-control" />
+                      <input
+                        type="number"
+                        id="pay-amount-1"
+                        className="form-control"
+                      />
                     </div>
                   </FormGroup>
                 </Col>
@@ -258,24 +349,45 @@ const FormLayoutsPage = ({ ...props }) => {
                     <ul className="custom-control-group g-3 align-center">
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="com-email-1" />
-                          <label className="custom-control-label" htmlFor="com-email-1">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="com-email-1"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="com-email-1"
+                          >
                             Email
                           </label>
                         </div>
                       </li>
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="com-sms-1" />
-                          <label className="custom-control-label" htmlFor="com-sms-1">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="com-sms-1"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="com-sms-1"
+                          >
                             SMS
                           </label>
                         </div>
                       </li>
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="com-phone-1" />
-                          <label className="custom-control-label" htmlFor="com-phone-1">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="com-phone-1"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="com-phone-1"
+                          >
                             Phone
                           </label>
                         </div>
@@ -289,24 +401,45 @@ const FormLayoutsPage = ({ ...props }) => {
                     <ul className="custom-control-group g-3 align-center">
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="pay-card-1" />
-                          <label className="custom-control-label" htmlFor="pay-card-1">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="pay-card-1"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="pay-card-1"
+                          >
                             Card
                           </label>
                         </div>
                       </li>
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="pay-bitcoin-1" />
-                          <label className="custom-control-label" htmlFor="pay-bitcoin-1">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="pay-bitcoin-1"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="pay-bitcoin-1"
+                          >
                             Bitcoin
                           </label>
                         </div>
                       </li>
                       <li>
                         <div className="custom-control custom-control-sm custom-checkbox">
-                          <input type="checkbox" className="custom-control-input form-control" id="pay-cash-1" />
-                          <label className="custom-control-label" htmlFor="pay-cash-1">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input form-control"
+                            id="pay-cash-1"
+                          />
+                          <label
+                            className="custom-control-label"
+                            htmlFor="pay-cash-1"
+                          >
                             Cash
                           </label>
                         </div>
@@ -328,7 +461,10 @@ const FormLayoutsPage = ({ ...props }) => {
           <BlockHead>
             <BlockHeadContent>
               <BlockTitle tag="h5">Setting Form Style</BlockTitle>
-              <p>You can make style out your setting related form as per below example.</p>
+              <p>
+                You can make style out your setting related form as per below
+                example.
+              </p>
             </BlockHeadContent>
           </BlockHead>
           <PreviewCard>
@@ -342,7 +478,9 @@ const FormLayoutsPage = ({ ...props }) => {
                     <label className="form-label" htmlFor="site-name">
                       Site Name
                     </label>
-                    <span className="form-note">Specify the name of your website.</span>
+                    <span className="form-note">
+                      Specify the name of your website.
+                    </span>
                   </FormGroup>
                 </Col>
                 <Col lg="7">
@@ -352,7 +490,7 @@ const FormLayoutsPage = ({ ...props }) => {
                         type="text"
                         id="site-name"
                         className="form-control"
-                        defaultValue="DashLite Admin Template"
+                        defaultValue="RAMU"
                       />
                     </div>
                   </FormGroup>
@@ -362,13 +500,20 @@ const FormLayoutsPage = ({ ...props }) => {
                 <Col lg="5">
                   <FormGroup>
                     <label className="form-label">Site Email</label>
-                    <span className="form-note">Specify the email address of your website.</span>
+                    <span className="form-note">
+                      Specify the email address of your website.
+                    </span>
                   </FormGroup>
                 </Col>
                 <Col lg="7">
                   <FormGroup>
                     <div className="form-control-wrap">
-                      <input type="text" id="site-email" className="form-control" defaultValue="info@softnio.com" />
+                      <input
+                        type="text"
+                        id="site-email"
+                        className="form-control"
+                        defaultValue="info@softnio.com"
+                      />
                     </div>
                   </FormGroup>
                 </Col>
@@ -377,7 +522,9 @@ const FormLayoutsPage = ({ ...props }) => {
                 <Col lg="5">
                   <FormGroup>
                     <label className="form-label">Site Copyright</label>
-                    <span className="form-note">Copyright information of your website.</span>
+                    <span className="form-note">
+                      Copyright information of your website.
+                    </span>
                   </FormGroup>
                 </Col>
                 <Col lg="7">
@@ -397,7 +544,9 @@ const FormLayoutsPage = ({ ...props }) => {
                 <Col lg="5">
                   <FormGroup>
                     <label className="form-label">Allow Registration</label>
-                    <span className="form-note">Enable or disable registration from site.</span>
+                    <span className="form-note">
+                      Enable or disable registration from site.
+                    </span>
                   </FormGroup>
                 </Col>
                 <Col lg="7">
@@ -412,7 +561,10 @@ const FormLayoutsPage = ({ ...props }) => {
                             name="reg-public"
                             id="reg-enable"
                           />
-                          <label className="custom-control-label" htmlFor="reg-enable">
+                          <label
+                            className="custom-control-label"
+                            htmlFor="reg-enable"
+                          >
                             Enable
                           </label>
                         </div>
@@ -425,7 +577,10 @@ const FormLayoutsPage = ({ ...props }) => {
                             name="reg-public"
                             id="reg-disable"
                           />
-                          <label className="custom-control-label" htmlFor="reg-disable">
+                          <label
+                            className="custom-control-label"
+                            htmlFor="reg-disable"
+                          >
                             Disable
                           </label>
                         </div>
@@ -438,7 +593,10 @@ const FormLayoutsPage = ({ ...props }) => {
                             name="reg-public"
                             id="reg-request"
                           />
-                          <label className="custom-control-label" htmlFor="reg-request">
+                          <label
+                            className="custom-control-label"
+                            htmlFor="reg-request"
+                          >
                             On Request
                           </label>
                         </div>
@@ -451,7 +609,9 @@ const FormLayoutsPage = ({ ...props }) => {
                 <Col lg="5">
                   <FormGroup>
                     <label className="form-label">Main Website</label>
-                    <span className="form-note">Specify the URL if your main website is external.</span>
+                    <span className="form-note">
+                      Specify the URL if your main website is external.
+                    </span>
                   </FormGroup>
                 </Col>
                 <Col lg="7">
@@ -473,7 +633,9 @@ const FormLayoutsPage = ({ ...props }) => {
                     <label className="form-label" htmlFor="site-off">
                       Maintanance Mode
                     </label>
-                    <span className="form-note">Enable to make website make offline.</span>
+                    <span className="form-note">
+                      Enable to make website make offline.
+                    </span>
                   </FormGroup>
                 </Col>
                 <Col lg="7">
@@ -485,7 +647,10 @@ const FormLayoutsPage = ({ ...props }) => {
                         name="reg-public"
                         id="site-off"
                       />
-                      <label className="custom-control-label" htmlFor="site-off">
+                      <label
+                        className="custom-control-label"
+                        htmlFor="site-off"
+                      >
                         Offline
                       </label>
                     </div>
@@ -495,7 +660,11 @@ const FormLayoutsPage = ({ ...props }) => {
               <Row className="g-3">
                 <Col lg="7" className="offset-lg-5">
                   <FormGroup className="mt-2">
-                    <Button color="primary" size="lg" onClick={(e) => e.preventDefault()}>
+                    <Button
+                      color="primary"
+                      size="lg"
+                      onClick={(e) => e.preventDefault()}
+                    >
                       Update
                     </Button>
                   </FormGroup>

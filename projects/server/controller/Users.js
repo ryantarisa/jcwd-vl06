@@ -22,6 +22,7 @@ export const loginUser = async (req, res) => {
     console.log(user);
 
     const id = user.id;
+    const uuid = user.uuid;
     const first_name = user.first_name;
     const last_name = user.last_name;
     const is_verified = user.is_verified;
@@ -38,6 +39,7 @@ export const loginUser = async (req, res) => {
         });
         res.status(200).json({
           id,
+          uuid,
           email,
           phone,
           first_name,
@@ -287,59 +289,3 @@ export const resetPassUser = async (req, res) => {
     res.status(400).json({ msg: error.message });
   }
 };
-
-// export const updateUser = async (req, res) => {
-//   const user = await User.findOne({
-//     where: {
-//       uuid: req.params.id,
-//     },
-//   });
-//   if (!user) return res.status(404).json({ msg: "User Not Found" });
-//   const { first_name, last_name, email, password, confPassword, phone } =
-//     req.body;
-//   let hashedPass;
-//   if (password === "" || password === null) {
-//     hashedPass = user.password;
-//   } else {
-//     const salt = await bcrypt.genSalt(10);
-//     hashedPass = await bcrypt.hash(password, salt);
-//   }
-
-//   if (password !== confPassword) {
-//     return res.status(400).json({ msg: "Password didn't match!" });
-//   }
-//   try {
-//     await User.update(
-//       {
-//         first_name: first_name,
-//         last_name: last_name,
-//         email: email,
-//         password: hashedPass,
-//         phone: phone,
-//       },
-//       {
-//         where: { id: user.id },
-//       }
-//     );
-//     res.status(201).json({ msg: "User Updated" });
-//   } catch (error) {
-//     res.status(400).json({ msg: error.message });
-//   }
-// };
-
-// export const deleteUser = async (req, res) => {
-//   const user = await User.findOne({
-//     where: {
-//       uuid: req.params.id,
-//     },
-//   });
-//   if (!user) return res.status(404).json({ msg: "User Not Found" });
-//   try {
-//     await User.destroy({
-//       where: { id: user.id },
-//     });
-//     res.status(201).json({ msg: "User Deleted" });
-//   } catch (error) {
-//     res.status(400).json({ msg: error.message });
-//   }
-// };

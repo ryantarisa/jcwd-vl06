@@ -32,7 +32,11 @@ const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
               click={props.sidebarToggle}
             />
           </div>
-          <div className={`nk-header-brand mr-3 ${window.location.pathname.includes("admin") && "d-xl-none"}`}>
+          <div
+            className={`nk-header-brand mr-3 ${
+              window.location.pathname.includes("admin") && "d-xl-none"
+            }`}
+          >
             <Logo />
           </div>
           <div className={`nk-header-search ml-3 ml-xl-0`}>
@@ -42,18 +46,27 @@ const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
             <ul className="nk-quick-nav">
               {user ? (
                 <>
-                  <li className="cart-fill hide-mb-xs" onClick={() => setVisibility(false)}>
+                  <li
+                    className="cart-fill hide-mb-xs"
+                    onClick={() => setVisibility(false)}
+                  >
                     <CartDropdown />
                   </li>
-                  <li className="chats-dropdown hide-mb-xs" onClick={() => setVisibility(false)}>
+                  <li
+                    className="chats-dropdown hide-mb-xs"
+                    onClick={() => setVisibility(false)}
+                  >
                     <TransactionDropdown />
                   </li>
-                  <li className="notification-dropdown mr-n1" onClick={() => setVisibility(false)}>
+                  {/* <li className="notification-dropdown mr-n1" onClick={() => setVisibility(false)}>
                     <Notification />
-                  </li>
+                  </li> */}
                 </>
               ) : null}
-              <li className="user-dropdown" onClick={() => setVisibility(false)}>
+              <li
+                className="user-dropdown"
+                onClick={() => setVisibility(false)}
+              >
                 <User />
               </li>
             </ul>

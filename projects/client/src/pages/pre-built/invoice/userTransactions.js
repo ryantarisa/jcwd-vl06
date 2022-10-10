@@ -372,11 +372,13 @@ const UserTransactions = () => {
                                 <span className="tb-odr-status">
                                   <Badge
                                     color={
-                                      item.status === "Paid"
+                                      item.status === "Completed"
                                         ? "success"
                                         : item.status === "Waiting for payment"
                                         ? "warning"
-                                        : "danger"
+                                        : item.status === "Rejected"
+                                        ? "danger"
+                                        : ""
                                     }
                                     className="badge-dot"
                                   >

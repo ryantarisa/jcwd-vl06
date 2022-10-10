@@ -120,6 +120,7 @@ import Transaction from "../pages/pre-built/transaction/TransactionList";
 import UserTransactions from "../pages/pre-built/invoice/userTransactions";
 import AdminList from "../pages/panel/e-commerce/customer/AdminList";
 import CartList from "../pages/Cart";
+import CheckoutPage from "../pages/CheckoutPage";
 
 const Pages = () => {
   useLayoutEffect(() => {
@@ -130,7 +131,14 @@ const Pages = () => {
     <Suspense fallback={<div />}>
       <Switch>
         {/* Transaction */}
-        <Route exact path={`/user/transaction-list/:id`} component={Transaction}></Route>
+        <Route
+          exact
+          path={`/user/transaction-list/:id`}
+          component={Transaction}
+        ></Route>
+
+        {/* Checkout */}
+        <Route exact path={`/checkout`} component={CheckoutPage}></Route>
 
         {/* Cart */}
         <Route exact path={`/cart`} component={Cart}></Route>
@@ -203,10 +211,26 @@ const Pages = () => {
         ></Route>
 
         <Route exact path={`/verified/:uuid`} component={Verified}></Route>
-        <Route exact path={`/user-profile-regular/`} component={UserProfileLayout}></Route>
-        <Route exact path={`/user-profile-notification`} component={UserProfileLayout}></Route>
-        <Route exact path={`/user-profile-activity`} component={UserProfileLayout}></Route>
-        <Route exact path={`/user-profile-setting`} component={UserProfileLayout}></Route>
+        <Route
+          exact
+          path={`/user-profile-regular/`}
+          component={UserProfileLayout}
+        ></Route>
+        <Route
+          exact
+          path={`/user-profile-notification`}
+          component={UserProfileLayout}
+        ></Route>
+        <Route
+          exact
+          path={`/user-profile-activity`}
+          component={UserProfileLayout}
+        ></Route>
+        <Route
+          exact
+          path={`/user-profile-setting`}
+          component={UserProfileLayout}
+        ></Route>
         <Route //Context api added
           exact
           path={`/user-contact-card`}
@@ -216,10 +240,26 @@ const Pages = () => {
             </UserContextProvider>
           )}
         ></Route>
-        <Route exact path={`/admin/order-list-default`} component={OrderDefault}></Route>
-        <Route exact path={`/admin/order-list-regular`} component={OrderRegular}></Route>
-        <Route exact path={`/admin/order-list-sales`} component={OrderSales}></Route>
-        <Route exact path={`/admin/product-list`} component={ProductList}></Route>
+        <Route
+          exact
+          path={`/admin/order-list-default`}
+          component={OrderDefault}
+        ></Route>
+        <Route
+          exact
+          path={`/admin/order-list-regular`}
+          component={OrderRegular}
+        ></Route>
+        <Route
+          exact
+          path={`/admin/order-list-sales`}
+          component={OrderSales}
+        ></Route>
+        <Route
+          exact
+          path={`/admin/product-list`}
+          component={ProductList}
+        ></Route>
 
         <Route // context api added
           exact
@@ -239,10 +279,26 @@ const Pages = () => {
             </ProductContextProvider>
           )}
         ></Route>
-        <Route exact path={`/admin/transactions`} component={InvoiceList}></Route>
-        <Route exact path={`/admin/user-transactions/:user_id`} component={UserTransactions}></Route>
-        <Route exact path={`/invoice-details/:id`} component={InvoiceDetails}></Route>
-        <Route exact path={`/admin/invoice-details/:id`} component={InvoiceDetailsAdm}></Route>
+        <Route
+          exact
+          path={`/admin/transactions`}
+          component={InvoiceList}
+        ></Route>
+        <Route
+          exact
+          path={`/admin/user-transactions/:user_id`}
+          component={UserTransactions}
+        ></Route>
+        <Route
+          exact
+          path={`/invoice-details/:id`}
+          component={InvoiceDetails}
+        ></Route>
+        <Route
+          exact
+          path={`/admin/invoice-details/:id`}
+          component={InvoiceDetailsAdm}
+        ></Route>
 
         {/*Demo Pages*/}
         <Route exact path={`/pages/terms-policy`} component={Terms}></Route>
