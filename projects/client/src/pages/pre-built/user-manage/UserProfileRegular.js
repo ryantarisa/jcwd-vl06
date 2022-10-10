@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "../../../layout/head/Head";
 import DatePicker from "react-datepicker";
-import { Modal, ModalBody, FormGroup } from "reactstrap";
+import { Modal, ModalBody, FormGroup, Input, Form } from "reactstrap";
 import {
   Block,
   BlockBetween,
@@ -16,7 +16,6 @@ import {
   RSelect,
 } from "../../../components/Component";
 import { countryOptions, userData } from "./UserData";
-import { getDateStructured } from "../../../utils/Utils";
 import axios from "axios";
 import { API_URL } from "../../../constants/API";
 
@@ -39,15 +38,14 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
     country: "Canada",
   });
   const [modal, setModal] = useState(false);
+  const [modalMain, setModalMain] = useState(false);
+  const [view, setView] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [modalAdd, setModalAdd] = useState(false);
 
   useEffect(() => {
     setProfileName(formData.name);
   }, [formData, setProfileName]);
-
-  const onInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setAddressData();
-  };
 
   const submitForm = () => {
     let submitData = {
@@ -65,23 +63,60 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
       );
 
       setAddress(response.data.response);
-      // console.log(response.data.response);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // DELETE ADDRESS
+  const delAdress = async (id) => {
+    try {
+      await axios.delete(`${API_URL}/address/delete-address/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+    getAllAddress();
+  };
+
+  // OnChange function to get the input data
+  const onInputChange = (e) => {
+    setAddress({ ...address, [e.target.name]: e.target.value });
+  };
+
+  // console.log(address);
   // ADD NEW ADDRESS
   const addNewAddress = async () => {
     try {
-      const response = await axios.post(`${API_URL}/address/add-address`, {
-        name: addressData.name,
-        address: addressData.address,
+      if (!address.address_name)
+        return setErrMsg("Please insert your address name");
+      if (!address.full_address)
+        return setErrMsg("Please insert your full address");
+
+      await axios.post(`${API_URL}/address/add-address`, {
+        name: address.address_name,
+        address: address.full_address,
+        user_id: user.id,
+      });
+      setModalAdd(false);
+      setModal(true);
+      getAllAddress();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // SET MAIN ADDRESS
+  const setMainAddress = async (data) => {
+    try {
+      const address = await axios.patch(`${API_URL}/address/set-main-address`, {
+        id: data,
         user_id: user.id,
       });
 
-      setAddress(response.data.response);
-      // console.log(response.data.response);
+      console.log(address.data);
+      getAllAddress();
+      setModalMain(true);
+      localStorage.setItem("address", JSON.stringify(address.data));
     } catch (error) {
       console.log(error);
     }
@@ -178,7 +213,13 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
               </span>
             </div>
           </div> */}
-          <div className="data-item" onClick={() => setModal(true)}>
+          <div
+            className="data-item"
+            onClick={() => {
+              setModal(true);
+              getAllAddress();
+            }}
+          >
             <div className="data-col">
               <span className="data-label">Address</span>
               {userAddress[0].name === "" ? (
@@ -244,7 +285,10 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                   style={{ marginTop: "15px" }}
                   color="primary"
                   size="sm"
-                  onClick={() => submitForm()}
+                  onClick={() => {
+                    submitForm();
+                    setModalAdd(true);
+                  }}
                 >
                   Add address
                 </Button>
@@ -271,15 +315,6 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                               <span>
                                 {""} {item.name}
                               </span>
-                              {/* <input
-                                value={item.name}
-                                type="text"
-                                id="address-l1"
-                                name="address"
-                                onChange={(e) => onInputChange(e)}
-                                defaultValue={formData.address}
-                                className="form-control"
-                              /> */}
                             </FormGroup>
                           </Col>
                           <Col md="6">
@@ -291,15 +326,6 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                               <span>
                                 {""} {item.address}
                               </span>
-                              {/* <input
-                                value={item.address}
-                                type="text"
-                                id="address-l2"
-                                name="address2"
-                                onChange={(e) => onInputChange(e)}
-                                defaultValue={formData.address2}
-                                className="form-control"
-                              /> */}
                             </FormGroup>
                           </Col>
                           <Col size="12">
@@ -317,7 +343,7 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                                   <Button
                                     color="primary"
                                     size="sm"
-                                    onClick={() => submitForm()}
+                                    onClick={() => setMainAddress(item.id)}
                                   >
                                     Set as main
                                   </Button>
@@ -329,6 +355,9 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                                   onClick={(ev) => {
                                     ev.preventDefault();
                                     setModalTab("1");
+                                    setView(true);
+                                    delAdress(item.id);
+                                    setView(true);
                                   }}
                                 >
                                   Delete
@@ -345,6 +374,165 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
                   );
                 })
               : null}
+          </div>
+        </ModalBody>
+      </Modal>
+
+      <Modal
+        isOpen={view}
+        className="modal-dialog-centered"
+        size="sm"
+        toggle={() => setView(false)}
+        key={address.id}
+      >
+        <ModalBody>
+          <div className="text-danger bold" style={{ textAlign: "center" }}>
+            Address Deleted
+          </div>
+          {/* <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "5px",
+            }}
+          >
+            <Button
+              onClick={() => {
+                delAdress(5);
+                setView(false);
+              }}
+              className=" text-white bg-primary"
+              style={{
+                marginRight: "6px",
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              onClick={() => setView(false)}
+              className=" text-white btn-danger"
+              style={{
+                marginLeft: "6px",
+              }}
+            >
+              No
+            </Button> */}
+          {/* </div> */}
+        </ModalBody>
+      </Modal>
+
+      <Modal
+        isOpen={modalMain}
+        className="modal-dialog-centered"
+        size="sm"
+        toggle={() => setModalMain(false)}
+        key={address.id}
+      >
+        <ModalBody>
+          <div className="text-primary bold" style={{ textAlign: "center" }}>
+            Set as main address!
+          </div>
+        </ModalBody>
+      </Modal>
+
+      <Modal
+        isOpen={modalAdd}
+        toggle={() => setModalAdd(false)}
+        className="modal-dialog-centered"
+        size="sm"
+      >
+        <ModalBody>
+          <div className="nk-modal-head">
+            <div>
+              <a href="#cancel" className="close">
+                {" "}
+                <Icon name="cross-sm" onClick={() => setModalAdd(false)}></Icon>
+              </a>
+              <div className="nk-modal-head">
+                <h4 className="nk-modal-title title">
+                  Add New Address
+                  <small className="text-primary"> </small>
+                </h4>
+              </div>
+              <div className="nk-tnx-details mt-md-2">
+                <Col>
+                  <div>
+                    <ul>
+                      <li
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                        className="py-1"
+                      >
+                        <span>Address Name</span>
+                        <span>
+                          <Form>
+                            <FormGroup>
+                              <Input
+                                pattern="[A-Za-z]"
+                                placeholder="Kost rantau"
+                                style={{ width: "131px" }}
+                                name="address_name"
+                                onChange={(e) => {
+                                  onInputChange(e);
+                                }}
+                                required
+                                // title={errMsg.account_name}
+                              ></Input>
+                            </FormGroup>
+                          </Form>
+                        </span>
+                      </li>
+                      <li
+                        className="py-1"
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <span>Full Address</span>
+                        <span>
+                          <Form encType="multipart/form-data">
+                            <FormGroup>
+                              <Input
+                                placeholder="Jl. Meong No.88"
+                                pattern="[A-Za-z]"
+                                style={{ width: "131px" }}
+                                name="full_address"
+                                onChange={(e) => {
+                                  onInputChange(e);
+                                }}
+                                required
+                              ></Input>
+                            </FormGroup>
+                          </Form>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </Col>
+                {errMsg === "" ? (
+                  <div className="text-white text-center font-italic">.</div>
+                ) : (
+                  <div className="text-danger text-center font-italic">
+                    {errMsg}
+                  </div>
+                )}
+
+                <div className="text-center mt-3">
+                  <Button
+                    className="toggle d-none d-md-inline"
+                    color="primary"
+                    onClick={() => {
+                      addNewAddress();
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </ModalBody>
       </Modal>

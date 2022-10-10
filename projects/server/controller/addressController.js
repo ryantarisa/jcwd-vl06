@@ -50,3 +50,16 @@ export const setMainAddress = async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+
+export const delAddress = async (req, res) => {
+  try {
+    await Address.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ msg: "Address Deleted" });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};

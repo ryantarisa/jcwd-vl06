@@ -47,6 +47,7 @@ const CartList = () => {
     add: false,
     details: false,
     deleted: false,
+    zeroCheckout: false,
   });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -201,11 +202,13 @@ const CartList = () => {
   // CHECKOUT CART
   const checkoutCart = async () => {
     let qtyArr = cartData.map(({ qty }) => qty);
-    console.log(qtyArr);
+    // console.log(qtyArr);
 
     try {
       if (qtyArr.includes(0)) {
         setView({ checkout: true });
+      } else if (cartData.length === 0) {
+        setView({ zeroCheckout: true });
       } else {
         return (window.location.href = `${process.env.PUBLIC_URL}/checkout`);
       }
@@ -437,8 +440,8 @@ const CartList = () => {
                       currentPage={currentPage}
                     />
                   ) : (
-                    <div className="text-center">
-                      <span className="text-silent">No products found</span>
+                    <div className="text-left">
+                      <span className="text-disabled">No products found</span>
                     </div>
                   )}
                 </div>
@@ -459,6 +462,21 @@ const CartList = () => {
             </div>
           </ModalBody>
         </Modal>
+
+        <Modal
+          isOpen={view.zeroCheckout}
+          toggle={() => onCloseModal()}
+          className="modal-dialog-centered"
+          size="sm"
+        >
+          <ModalBody>
+            <h4 className="center text-danger">
+              <b>Oops!</b>
+            </h4>
+            <b className="caption-text center ">Your cart still empty 😅</b>
+          </ModalBody>
+        </Modal>
+
         <Modal
           isOpen={view.checkout}
           toggle={() => onCloseModal()}

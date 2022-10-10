@@ -252,13 +252,13 @@ const CheckoutPage = () => {
 
               <div>{user.phone}</div>
               <div>{userAddress[0].address}</div>
-              <hr></hr>
+              {/* <hr></hr>
               <Button
                 className="toggle d-none d-md-inline-flex btn-sm"
                 color="primary"
               >
                 Change Address
-              </Button>
+              </Button> */}
             </BlockHeadContent>
 
             {/* RIGHT SIDE */}
@@ -543,53 +543,6 @@ const CheckoutPage = () => {
                     </h4>
                   </div>
                   <div className="nk-tnx-details mt-md-2">
-                    {/* <Col>
-                      <div>
-                        <ul>
-                          <li
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                            className="py-1"
-                          >
-                            <span>Bank</span>
-                            <span>
-                              <Input type="select">
-                                <option value="bri">Bank BRI</option>
-                                <option value="bca">Bank BCA</option>
-                                <option value="mandiri">Bank Mandiri</option>
-                                <option value="bni">Bank BNI</option>
-                                <option value="cimb">Bank CIMB</option>
-                                <option value="btn">Bank BTN</option>
-                              </Input>
-                            </span>
-                          </li>
-                          <li
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                            className="py-1"
-                          >
-                            <span>Account Name</span>
-                            <span>
-                              <Input style={{ width: "131px" }}></Input>
-                            </span>
-                          </li>
-                          <li
-                            className="py-1"
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            <span>Amount</span>
-                            <b>{toCurrency(totalPrice() + shipment)}</b>
-                          </li>
-                        </ul>
-                      </div>
-                    </Col> */}
                     <Col>
                       <div className="text-smaller text-black">
                         Make sure all information are correct

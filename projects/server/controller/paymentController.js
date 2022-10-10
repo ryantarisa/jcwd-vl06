@@ -30,9 +30,6 @@ export const getPayment = async (req, res) => {
   try {
     const response = await Payment.findAll({
       attributes: ["invoice_id"],
-      // where: {
-      //   invoice_id: req.params.id,
-      // },
     });
     res.status(200).json({ response });
   } catch (error) {
