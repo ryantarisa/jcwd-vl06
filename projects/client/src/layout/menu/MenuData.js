@@ -39,11 +39,11 @@ const menu = [
         text: "Admins",
         link: "/admin/admin-list",
       },
-      {
-        icon: "chat-fill",
-        text: "Support",
-        link: "/admin/support",
-      },
+      // {
+      //   icon: "chat-fill",
+      //   text: "Support",
+      //   link: "/admin/support",
+      // },
     ],
   },
   {

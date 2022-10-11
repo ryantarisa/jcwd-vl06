@@ -6,7 +6,7 @@ import {
   getInvoicesByUserId,
   setInvoiceStatus,
 } from "../controller/invoiceHeaderController.js";
-import { sendOrderNotif } from "../controller/temp_notifController.js";
+import { sendOrderNotif } from "../controller/notifController.js";
 
 const routers = express.Router();
 
@@ -16,6 +16,6 @@ routers.post("/getInvoiceHeaders", getInvoiceHeaders);
 routers.post("/getInvoicesByUserId", getInvoicesByUserId);
 routers.patch("/setStatus", setInvoiceStatus);
 
-routers.get("/get-invoice", sendOrderNotif); // TEMPORARY
+routers.post("/sendNotif", sendOrderNotif); // TEMPORARY
 
 export default routers;

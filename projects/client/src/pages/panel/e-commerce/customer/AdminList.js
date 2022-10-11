@@ -421,7 +421,7 @@ const AdminList = () => {
 
             <DataTableBody>
               <DataTableHead>
-                <DataTableRow className="nk-tb-col-check">
+                {/* <DataTableRow className="nk-tb-col-check">
                   <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
@@ -434,10 +434,10 @@ const AdminList = () => {
                       htmlFor="uid"
                     ></label>
                   </div>
-                </DataTableRow>
+                </DataTableRow> */}
 
                 <DataTableRow>
-                  <span className="sub-text">User</span>
+                  <span className="sub-text">Admin</span>
                 </DataTableRow>
 
                 <DataTableRow size="lg">
@@ -501,7 +501,7 @@ const AdminList = () => {
                 ? admins.map((item) => {
                     return (
                       <DataTableItem key={item.id}>
-                        <DataTableRow className="nk-tb-col-check">
+                        {/* <DataTableRow className="nk-tb-col-check">
                           <div className="custom-control custom-control-sm custom-checkbox notext">
                             <input
                               type="checkbox"
@@ -516,7 +516,7 @@ const AdminList = () => {
                               htmlFor={item.id + "uid1"}
                             ></label>
                           </div>
-                        </DataTableRow>
+                        </DataTableRow> */}
 
                         <DataTableRow>
                           <Link
