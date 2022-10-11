@@ -39,9 +39,9 @@ const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
           >
             <Logo />
           </div>
-          <div className={`nk-header-search ml-3 ml-xl-0`}>
+          {/* <div className={`nk-header-search ml-3 ml-xl-0`}>
             <HeaderSearch />
-          </div>
+          </div> */}
           <div className="nk-header-tools">
             <ul className="nk-quick-nav">
               {user ? (

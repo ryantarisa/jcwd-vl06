@@ -57,7 +57,7 @@ const AdminList = () => {
     add: false,
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemPerPage, setItemPerPage] = useState(5);
+  const [itemPerPage, setItemPerPage] = useState(10);
   const [asc, setAsc] = useState(true);
 
   const [errMsg, setErrMsg] = useState({});
@@ -227,25 +227,27 @@ const AdminList = () => {
                 >
                   <Icon name="menu-alt-r"></Icon>
                 </Button>
-                <div
-                  className="toggle-expand-content"
-                  style={{ display: sm ? "block" : "none" }}
-                >
-                  <ul className="nk-block-tools g-3">
-                    {admin.id && admin.role === "Super Admin" && (
-                      <li className="nk-block-tools-opt">
-                        <Button
-                          color="primary"
-                          className="btn-icon pr-2"
-                          onClick={() => setModal({ add: true })}
-                        >
-                          <Icon name="plus"></Icon>
-                          <span>Add New Admin</span>
-                        </Button>
-                      </li>
-                    )}
-                  </ul>
-                </div>
+                {admin.role === "Admin" ? null : (
+                  <div
+                    className="toggle-expand-content"
+                    style={{ display: sm ? "block" : "none" }}
+                  >
+                    <ul className="nk-block-tools g-3">
+                      {admin.id && admin.role === "Super Admin" && (
+                        <li className="nk-block-tools-opt">
+                          <Button
+                            color="primary"
+                            className="btn-icon pr-2"
+                            onClick={() => setModal({ add: true })}
+                          >
+                            <Icon name="plus"></Icon>
+                            <span>Add New Admin</span>
+                          </Button>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                )}
               </div>
             </BlockHeadContent>
           </BlockBetween>
@@ -316,22 +318,6 @@ const AdminList = () => {
                                     </li>
                                     <li
                                       className={
-                                        itemPerPage === 5 ? "active" : ""
-                                      }
-                                    >
-                                      <DropdownItem
-                                        tag="a"
-                                        href="#dropdownitem"
-                                        onClick={(ev) => {
-                                          ev.preventDefault();
-                                          setPerPage(5);
-                                        }}
-                                      >
-                                        5
-                                      </DropdownItem>
-                                    </li>
-                                    <li
-                                      className={
                                         itemPerPage === 10 ? "active" : ""
                                       }
                                     >
@@ -344,6 +330,22 @@ const AdminList = () => {
                                         }}
                                       >
                                         10
+                                      </DropdownItem>
+                                    </li>
+                                    <li
+                                      className={
+                                        itemPerPage === 15 ? "active" : ""
+                                      }
+                                    >
+                                      <DropdownItem
+                                        tag="a"
+                                        href="#dropdownitem"
+                                        onClick={(ev) => {
+                                          ev.preventDefault();
+                                          setPerPage(15);
+                                        }}
+                                      >
+                                        15
                                       </DropdownItem>
                                     </li>
                                   </ul>
@@ -419,7 +421,7 @@ const AdminList = () => {
 
             <DataTableBody>
               <DataTableHead>
-                <DataTableRow className="nk-tb-col-check">
+                {/* <DataTableRow className="nk-tb-col-check">
                   <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
@@ -432,10 +434,10 @@ const AdminList = () => {
                       htmlFor="uid"
                     ></label>
                   </div>
-                </DataTableRow>
+                </DataTableRow> */}
 
                 <DataTableRow>
-                  <span className="sub-text">User</span>
+                  <span className="sub-text">Admin</span>
                 </DataTableRow>
 
                 <DataTableRow size="lg">
@@ -499,7 +501,7 @@ const AdminList = () => {
                 ? admins.map((item) => {
                     return (
                       <DataTableItem key={item.id}>
-                        <DataTableRow className="nk-tb-col-check">
+                        {/* <DataTableRow className="nk-tb-col-check">
                           <div className="custom-control custom-control-sm custom-checkbox notext">
                             <input
                               type="checkbox"
@@ -514,7 +516,7 @@ const AdminList = () => {
                               htmlFor={item.id + "uid1"}
                             ></label>
                           </div>
-                        </DataTableRow>
+                        </DataTableRow> */}
 
                         <DataTableRow>
                           <Link

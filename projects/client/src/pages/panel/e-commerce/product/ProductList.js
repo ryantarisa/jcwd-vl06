@@ -18,7 +18,12 @@ import {
   PaginationComponent,
   PreviewAltCard,
 } from "../../../../components/Component";
-import { DropdownItem, UncontrolledDropdown, DropdownMenu, DropdownToggle } from "reactstrap";
+import {
+  DropdownItem,
+  UncontrolledDropdown,
+  DropdownMenu,
+  DropdownToggle,
+} from "reactstrap";
 import { productData, unitOptions } from "./ProductData";
 import SimpleBar from "simplebar-react";
 import { useForm } from "react-hook-form";
@@ -69,7 +74,7 @@ const ProductList = () => {
 
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemPerPage] = useState(5);
+  const [itemPerPage] = useState(10);
 
   // CONVERT PRICE TO CURRENCY TYPE
   const toCurrency = (data) => {
@@ -183,7 +188,8 @@ const ProductList = () => {
   const onFormSubmit = async () => {
     try {
       if (!formData.unit) return setErrMsg({ unit: "Unit is required" });
-      if (!formData.category_id) return setErrMsg({ category_id: "Category is required" });
+      if (!formData.category_id)
+        return setErrMsg({ category_id: "Category is required" });
       if (!files.length) return setErrMsg({ file: "Image is required" });
       let form = new FormData();
       await form.append("file", files[0]);
@@ -331,7 +337,10 @@ const ProductList = () => {
                 >
                   <Icon name="more-v"></Icon>
                 </a>
-                <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
+                <div
+                  className="toggle-expand-content"
+                  style={{ display: sm ? "block" : "none" }}
+                >
                   <ul className="nk-block-tools g-3">
                     <li>
                       <div className="form-control-wrap">
@@ -410,7 +419,7 @@ const ProductList = () => {
         <Block>
           <div className="nk-tb-list is-separate is-medium mb-3">
             <DataTableHead className="nk-tb-item">
-              <DataTableRow className="nk-tb-col-check">
+              {/* <DataTableRow className="nk-tb-col-check">
                 <div className="custom-control custom-control-sm custom-checkbox notext">
                   <input
                     type="checkbox"
@@ -418,9 +427,12 @@ const ProductList = () => {
                     id="uid_1"
                     onChange={(e) => selectorCheck(e)}
                   />
-                  <label className="custom-control-label" htmlFor="uid_1"></label>
+                  <label
+                    className="custom-control-label"
+                    htmlFor="uid_1"
+                  ></label>
                 </div>
-              </DataTableRow>
+              </DataTableRow> */}
               <DataTableRow size="sm">
                 <span>Name</span>
               </DataTableRow>
@@ -450,7 +462,7 @@ const ProductList = () => {
               </DataTableRow>
 
               <DataTableRow className="nk-tb-col-tools">
-                <ul className="nk-tb-actions gx-1 my-n1">
+                {/* <ul className="nk-tb-actions gx-1 my-n1">
                   <li className="mr-n1">
                     <UncontrolledDropdown>
                       <DropdownToggle
@@ -464,7 +476,11 @@ const ProductList = () => {
                       <DropdownMenu right>
                         <ul className="link-list-opt no-bdr">
                           <li>
-                            <DropdownItem tag="a" href="#edit" onClick={(ev) => ev.preventDefault()}>
+                            <DropdownItem
+                              tag="a"
+                              href="#edit"
+                              onClick={(ev) => ev.preventDefault()}
+                            >
                               <Icon name="edit"></Icon>
                               <span>Edit Selected</span>
                             </DropdownItem>
@@ -485,14 +501,22 @@ const ProductList = () => {
                           </li>
 
                           <li>
-                            <DropdownItem tag="a" href="#stock" onClick={(ev) => ev.preventDefault()}>
+                            <DropdownItem
+                              tag="a"
+                              href="#stock"
+                              onClick={(ev) => ev.preventDefault()}
+                            >
                               <Icon name="bar-c"></Icon>
                               <span>Update Stock</span>
                             </DropdownItem>
                           </li>
 
                           <li>
-                            <DropdownItem tag="a" href="#price" onClick={(ev) => ev.preventDefault()}>
+                            <DropdownItem
+                              tag="a"
+                              href="#price"
+                              onClick={(ev) => ev.preventDefault()}
+                            >
                               <Icon name="invest"></Icon>
                               <span>Update Price</span>
                             </DropdownItem>
@@ -501,7 +525,7 @@ const ProductList = () => {
                       </DropdownMenu>
                     </UncontrolledDropdown>
                   </li>
-                </ul>
+                </ul> */}
               </DataTableRow>
             </DataTableHead>
 
@@ -509,7 +533,7 @@ const ProductList = () => {
               ? products.map((item) => {
                   return (
                     <DataTableItem key={item.id}>
-                      <DataTableRow className="nk-tb-col-check">
+                      {/* <DataTableRow className="nk-tb-col-check">
                         <div className="custom-control custom-control-sm custom-checkbox notext">
                           <input
                             type="checkbox"
@@ -519,12 +543,21 @@ const ProductList = () => {
                             // key={Math.random()}
                             onChange={(e) => onSelectChange(e, item.id)}
                           />
-                          <label className="custom-control-label" htmlFor={item.id + "uid1"}></label>
+                          <label
+                            className="custom-control-label"
+                            htmlFor={item.id + "uid1"}
+                          ></label>
                         </div>
-                      </DataTableRow>
+                      </DataTableRow> */}
                       <DataTableRow size="sm">
                         <span className="tb-product">
-                          <img src={item.image ? getImageUrl(item.image) : ProductH} alt="product" className="thumb" />
+                          <img
+                            src={
+                              item.image ? getImageUrl(item.image) : ProductH
+                            }
+                            alt="product"
+                            className="thumb"
+                          />
                           <span className="title">{item.name}</span>
                         </span>
                       </DataTableRow>
@@ -536,12 +569,16 @@ const ProductList = () => {
                       </DataTableRow>
                       <DataTableRow>
                         <span className="tb-sub">
-                          {Intl.NumberFormat("de-DE").format(item.total_stock)} {item.unit}
+                          {Intl.NumberFormat("de-DE").format(item.total_stock)}{" "}
+                          {item.unit}
                         </span>
                       </DataTableRow>
                       <DataTableRow size="md">
                         <span className="tb-sub">
-                          {Intl.NumberFormat("de-DE").format(item.unit_per_bottle)} {item.unit}
+                          {Intl.NumberFormat("de-DE").format(
+                            item.unit_per_bottle
+                          )}{" "}
+                          {item.unit}
                         </span>
                       </DataTableRow>
                       <DataTableRow size="md">
@@ -637,12 +674,14 @@ const ProductList = () => {
 
           <PreviewAltCard>
             {products.length ? (
-              <PaginationComponent
-                itemPerPage={itemPerPage}
-                totalItems={productCount}
-                paginate={paginate}
-                currentPage={currentPage}
-              />
+              <div className="d-flex justify-content-end">
+                <PaginationComponent
+                  itemPerPage={itemPerPage}
+                  totalItems={productCount}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
+              </div>
             ) : (
               <div className="text-center">
                 <span className="text-silent">No products found</span>
@@ -651,7 +690,12 @@ const ProductList = () => {
           </PreviewAltCard>
         </Block>
 
-        <Modal isOpen={view.edit} toggle={() => onFormCancel()} className="modal-dialog-centered" size="lg">
+        <Modal
+          isOpen={view.edit}
+          toggle={() => onFormCancel()}
+          className="modal-dialog-centered"
+          size="lg"
+        >
           <ModalBody>
             <a href="#cancel" className="close">
               {" "}
@@ -684,7 +728,11 @@ const ProductList = () => {
                             })}
                             defaultValue={formData.name}
                           />
-                          {errors.name && <span className="invalid">{errors.name.message}</span>}
+                          {errors.name && (
+                            <span className="invalid">
+                              {errors.name.message}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </Col>
@@ -702,7 +750,11 @@ const ProductList = () => {
                             className="form-control"
                             defaultValue={formData.price}
                           />
-                          {errors.price && <span className="invalid">{errors.price.message}</span>}
+                          {errors.price && (
+                            <span className="invalid">
+                              {errors.price.message}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </Col>
@@ -720,7 +772,11 @@ const ProductList = () => {
                             ref={register({ required: "This is required" })}
                             defaultValue={formData.total_stock}
                           />
-                          {errors.total_stock && <span className="invalid">{errors.total_stock.message}</span>}
+                          {errors.total_stock && (
+                            <span className="invalid">
+                              {errors.total_stock.message}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </Col>
@@ -746,7 +802,9 @@ const ProductList = () => {
                               );
                             })}
                           </select>
-                          {errMsg.unit && <span className="invalid">{errMsg.unit}</span>}
+                          {errMsg.unit && (
+                            <span className="invalid">{errMsg.unit}</span>
+                          )}
                         </div>
                       </div>
                     </Col>
@@ -764,7 +822,11 @@ const ProductList = () => {
                             ref={register({ required: "This is required" })}
                             defaultValue={formData.unit_per_bottle}
                           />
-                          {errors.unit_per_bottle && <span className="invalid">{errors.unit_per_bottle.message}</span>}
+                          {errors.unit_per_bottle && (
+                            <span className="invalid">
+                              {errors.unit_per_bottle.message}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </Col>
@@ -777,7 +839,12 @@ const ProductList = () => {
                             type="number"
                             className="form-control"
                             value={
-                              formData.total_stock ? Math.floor(formData.total_stock / formData.unit_per_bottle) : 0
+                              formData.total_stock
+                                ? Math.floor(
+                                    formData.total_stock /
+                                      formData.unit_per_bottle
+                                  )
+                                : 0
                             }
                           />
                         </div>
@@ -805,7 +872,11 @@ const ProductList = () => {
                               );
                             })}
                           </select>
-                          {errMsg.category_id && <span className="invalid">{errMsg.category_id}</span>}
+                          {errMsg.category_id && (
+                            <span className="invalid">
+                              {errMsg.category_id}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </Col>
@@ -815,7 +886,11 @@ const ProductList = () => {
                           Product Image
                         </label>
                         <div className="form-control-wrap">
-                          <Dropzone onDrop={(acceptedFiles) => handleDropChange(acceptedFiles)}>
+                          <Dropzone
+                            onDrop={(acceptedFiles) =>
+                              handleDropChange(acceptedFiles)
+                            }
+                          >
                             {({ getRootProps, getInputProps }) => (
                               <section>
                                 <div
@@ -824,7 +899,10 @@ const ProductList = () => {
                                 >
                                   <input {...getInputProps()} />
                                   {files.length === 0 && formData.image && (
-                                    <img src={getImageUrl(formData.image)} alt="preview" />
+                                    <img
+                                      src={getImageUrl(formData.image)}
+                                      alt="preview"
+                                    />
                                   )}
                                   {files.map((file) => (
                                     <div
@@ -873,7 +951,12 @@ const ProductList = () => {
           </ModalBody>
         </Modal>
 
-        <Modal isOpen={view.details} toggle={() => onFormCancel()} className="modal-dialog-centered" size="lg">
+        <Modal
+          isOpen={view.details}
+          toggle={() => onFormCancel()}
+          className="modal-dialog-centered"
+          size="lg"
+        >
           <ModalBody>
             <a href="#cancel" className="close">
               {" "}
@@ -894,11 +977,20 @@ const ProductList = () => {
             <div className="nk-tnx-details mt-sm-3">
               <Row className="gy-3">
                 <Col lg={6}>
-                  <img src={formData.image ? getImageUrl(formData.image) : ProductH} alt="product" />
+                  <img
+                    src={
+                      formData.image ? getImageUrl(formData.image) : ProductH
+                    }
+                    alt="product"
+                  />
                 </Col>
                 <Col lg={6}>
                   <span className="sub-text">Description</span>
-                  <p>{formData.description ? formData.description : "no description"}</p>
+                  <p>
+                    {formData.description
+                      ? formData.description
+                      : "no description"}
+                  </p>
                 </Col>
                 <Col lg={6}>
                   <span className="sub-text">Product Name</span>
@@ -906,11 +998,15 @@ const ProductList = () => {
                 </Col>
                 <Col lg={6}>
                   <span className="sub-text">Product Price</span>
-                  <span className="caption-text">{toCurrency(formData.price)}</span>
+                  <span className="caption-text">
+                    {toCurrency(formData.price)}
+                  </span>
                 </Col>
                 <Col lg={6}>
                   <span className="sub-text">Product Category</span>
-                  <span className="caption-text">{formData.category.category}</span>
+                  <span className="caption-text">
+                    {formData.category.category}
+                  </span>
                 </Col>
                 <Col lg={6}>
                   <span className="sub-text">Stock</span>
@@ -953,7 +1049,9 @@ const ProductList = () => {
                         })}
                         defaultValue={formData.name}
                       />
-                      {errors.name && <span className="invalid">{errors.name.message}</span>}
+                      {errors.name && (
+                        <span className="invalid">{errors.name.message}</span>
+                      )}
                     </div>
                   </div>
                 </Col>
@@ -972,7 +1070,9 @@ const ProductList = () => {
                         ref={register({ required: "Price is required" })}
                         defaultValue={formData.price}
                       />
-                      {errors.price && <span className="invalid">{errors.price.message}</span>}
+                      {errors.price && (
+                        <span className="invalid">{errors.price.message}</span>
+                      )}
                     </div>
                   </div>
                 </Col>
@@ -992,7 +1092,11 @@ const ProductList = () => {
                         ref={register({ required: "This is required" })}
                         defaultValue={formData.total_stock}
                       />
-                      {errors.total_stock && <span className="invalid">{errors.total_stock.message}</span>}
+                      {errors.total_stock && (
+                        <span className="invalid">
+                          {errors.total_stock.message}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </Col>
@@ -1018,7 +1122,9 @@ const ProductList = () => {
                           );
                         })}
                       </select>
-                      {errMsg.unit && <span className="invalid">{errMsg.unit}</span>}
+                      {errMsg.unit && (
+                        <span className="invalid">{errMsg.unit}</span>
+                      )}
                     </div>
                   </div>
                 </Col>
@@ -1037,7 +1143,11 @@ const ProductList = () => {
                         placeholder="100"
                         defaultValue={formData.unit_per_bottle}
                       />
-                      {errors.unit_per_bottle && <span className="invalid">{errors.unit_per_bottle.message}</span>}
+                      {errors.unit_per_bottle && (
+                        <span className="invalid">
+                          {errors.unit_per_bottle.message}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </Col>
@@ -1051,7 +1161,9 @@ const ProductList = () => {
                         className="form-control"
                         value={
                           formData.total_stock && formData.unit_per_bottle
-                            ? Math.floor(formData.total_stock / formData.unit_per_bottle)
+                            ? Math.floor(
+                                formData.total_stock / formData.unit_per_bottle
+                              )
                             : 0
                         }
                       />
@@ -1064,7 +1176,12 @@ const ProductList = () => {
                       <label className="form-label" htmlFor="category_id">
                         Category
                       </label>
-                      <Button size="sm" className="toggle" color="primary" onClick={() => toggle("category")}>
+                      <Button
+                        size="sm"
+                        className="toggle"
+                        color="primary"
+                        onClick={() => toggle("category")}
+                      >
                         <Icon name="plus"></Icon>
                       </Button>
                     </div>
@@ -1085,17 +1202,29 @@ const ProductList = () => {
                           );
                         })}
                       </select>
-                      {errMsg.category_id && <span className="invalid">{errMsg.category_id}</span>}
+                      {errMsg.category_id && (
+                        <span className="invalid">{errMsg.category_id}</span>
+                      )}
                     </div>
                   </div>
                 </Col>
                 <Col size="12">
-                  <Dropzone onDrop={(acceptedFiles) => handleDropChange(acceptedFiles)}>
+                  <Dropzone
+                    onDrop={(acceptedFiles) => handleDropChange(acceptedFiles)}
+                  >
                     {({ getRootProps, getInputProps }) => (
                       <section>
-                        <div {...getRootProps()} className="dropzone upload-zone small bg-lighter my-2 dz-clickable">
+                        <div
+                          {...getRootProps()}
+                          className="dropzone upload-zone small bg-lighter my-2 dz-clickable"
+                        >
                           <input {...getInputProps()} />
-                          {files.length === 0 && <p>Drag 'n' drop some files here, or click to select files</p>}
+                          {files.length === 0 && (
+                            <p>
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </p>
+                          )}
                           {files.map((file) => (
                             <div
                               key={file.name}
@@ -1111,7 +1240,15 @@ const ProductList = () => {
                     )}
                   </Dropzone>
                   {errMsg.file && (
-                    <span style={{ color: "red", fontStyle: "italic", fontSize: 11 }}>{errMsg.file}</span>
+                    <span
+                      style={{
+                        color: "red",
+                        fontStyle: "italic",
+                        fontSize: 11,
+                      }}
+                    >
+                      {errMsg.file}
+                    </span>
                   )}
                 </Col>
                 <Col size="12">
@@ -1173,10 +1310,18 @@ const ProductList = () => {
               </Col>
 
               <Col size="12">
-                <Button disabled={!addCategory} onClick={btnAddCategory} className="mr-2" color="primary">
+                <Button
+                  disabled={!addCategory}
+                  onClick={btnAddCategory}
+                  className="mr-2"
+                  color="primary"
+                >
                   <span>Add Category</span>
                 </Button>
-                <Button onClick={() => setView({ ...view, category: false })} color="primary">
+                <Button
+                  onClick={() => setView({ ...view, category: false })}
+                  color="primary"
+                >
                   <span>Cancel</span>
                 </Button>
               </Col>

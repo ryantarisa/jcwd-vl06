@@ -140,6 +140,18 @@ export const setInvoiceStatus = async (req, res) => {
       { status: req.body.status },
       { where: { id: req.body.id } }
     );
+
+    // if (req.body.status === "Canceled") {
+    //   const invoice = await InvoiceHeader.findOne({
+    //     where: { id: req.body.id },
+    //   });
+    //   const details = await InvoiceDetail.findAll({
+    //     where: { invoice_id: invoice.invoice_id },
+    //   });
+    //   await details.forEach((item) => {
+    //     // Products.update({total_stock: });
+    //   });
+    // }
     res.status(200).send(true);
   } catch (error) {
     console.log(error);
