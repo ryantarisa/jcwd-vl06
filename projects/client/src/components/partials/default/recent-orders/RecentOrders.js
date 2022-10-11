@@ -3,9 +3,14 @@ import moment from "moment";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Card } from "reactstrap";
+import { Badge, Card } from "reactstrap";
 import { API_URL } from "../../../../constants/API";
-import { DataTableHead, DataTableRow, DataTableItem, UserAvatar } from "../../../Component";
+import {
+  DataTableHead,
+  DataTableRow,
+  DataTableItem,
+  UserAvatar,
+} from "../../../Component";
 import { recentOrderData } from "./OrderData";
 
 const RecentOrders = ({ thisMonth }) => {
@@ -16,9 +21,15 @@ const RecentOrders = ({ thisMonth }) => {
     try {
       let startDate = thisMonth[0];
       let endDate = thisMonth[1];
-      if (!startDate) startDate = moment().subtract(1, "month").startOf("month").format("YYYY-MM-DD");
+      if (!startDate)
+        startDate = moment()
+          .subtract(1, "month")
+          .startOf("month")
+          .format("YYYY-MM-DD");
       if (!endDate) endDate = moment(new Date().getTime()).format("YYYY-MM-DD");
-      const response = await axios.post(`${API_URL}/report/getRecentOrder`, { thisMonth: [startDate, endDate] });
+      const response = await axios.post(`${API_URL}/report/getRecentOrder`, {
+        thisMonth: [startDate, endDate],
+      });
       setRecentOrder(response.data);
     } catch (error) {
       console.log(error);
@@ -57,19 +68,30 @@ const RecentOrders = ({ thisMonth }) => {
           </div>
         </DataTableRow>
         <DataTableRow size="md">
-          <span className="tb-sub">{moment(item.createdAt).format("MMM Do, YYYY")}</span>
+          <span className="tb-sub">
+            {moment(item.createdAt).format("MMM Do, YYYY")}
+          </span>
         </DataTableRow>
         <DataTableRow>
-          <span className="tb-sub tb-amount">{toCurrency(item.grand_total)}</span>
+          <span className="tb-sub tb-amount">
+            {toCurrency(item.grand_total)}
+          </span>
         </DataTableRow>
         <DataTableRow>
-          <span
-            className={`badge badge-dot badge-dot-xs badge-${
-              item.status === "Paid" ? "success" : item.status === "Rejected" ? "danger" : "warning"
-            }`}
+          <Badge
+            color={
+              item.status === "Completed"
+                ? "success"
+                : item.status === "Canceled"
+                ? "danger"
+                : item.status === "Processing Order"
+                ? "warning"
+                : "grey"
+            }
+            className="badge-dot"
           >
             {item.status}
-          </span>
+          </Badge>
         </DataTableRow>
       </DataTableItem>
     ));

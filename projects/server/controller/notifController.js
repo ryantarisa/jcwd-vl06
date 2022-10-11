@@ -13,6 +13,7 @@ import moment from "moment";
 
 export const sendOrderNotif = async (req, res) => {
   try {
+    console.log(req.body);
     const result = await InvoiceHeader.findOne({
       include: [
         {
@@ -25,7 +26,7 @@ export const sendOrderNotif = async (req, res) => {
           include: [{ model: Products, attributes: ["name"] }],
         },
       ],
-      where: { invoice_id: "546H74W" },
+      where: { invoice_id: req.body.invoice_id },
     });
 
     let data = {

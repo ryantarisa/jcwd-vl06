@@ -131,7 +131,7 @@ const CheckoutPage = () => {
     }
   }, [onSearchText]);
 
-  console.log(cartData);
+  // console.log(cartData);
 
   // CLOSING MODAL
   const onCloseModal = () => {
@@ -192,13 +192,17 @@ const CheckoutPage = () => {
         }
       );
 
-      cartData.map((item) => {
+      await cartData.map((item) => {
         axios.post(`${API_URL}/invoices/addInvoiceDetail`, {
           invoice_id: response.data.invoice_id,
           product_id: item.id,
           price: item.price,
           qty: item.qty,
         });
+      });
+
+      await axios.post(`${API_URL}/invoices/sendNotif`, {
+        invoice_id: response.data.invoice_id,
       });
 
       window.location.replace(`/user/transaction-list/${user.id}`);
