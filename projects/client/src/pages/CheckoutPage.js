@@ -519,94 +519,94 @@ const CheckoutPage = () => {
           </Card>
         </Block>
 
-        {userAddress[0].name === !"" ? (
-          <Modal
-            isOpen={view.proceedTransaction}
-            toggle={() => onCloseModal()}
-            className="modal-dialog-centered"
-            size="sm"
-          >
-            <ModalBody>
-              <div className="nk-modal-head">
-                {shipment > 0 ? (
-                  <div>
-                    <a href="#cancel" className="close">
-                      {" "}
-                      <Icon
-                        name="cross-sm"
-                        onClick={(ev) => {
-                          ev.preventDefault();
-                          onCloseModal();
-                        }}
-                      ></Icon>
-                    </a>
-                    <div className="nk-modal-head">
-                      <h4 className="nk-modal-title title">
-                        {/* Payment Method */}
-                        Proceed Transaction
-                        <small className="text-primary">
-                          {" "}
-                          {/* #{item.invoice_id} */}
-                        </small>
-                      </h4>
-                    </div>
-                    <div className="nk-tnx-details mt-md-2">
-                      <Col>
-                        <div className="text-smaller text-black">
-                          Make sure all information are correct
-                        </div>
-                      </Col>
-                      <div className="text-center mt-3">
-                        <Button
-                          className="toggle d-none d-md-inline"
-                          color="primary"
-                          onClick={() => {
-                            invoice();
-                            emptyCart();
-                          }}
-                        >
-                          Confirm Transaction
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <h4 className="center text-danger">
-                      <b>Yikes!</b>
+        {/* {userAddress[0].name === !"" ? ( */}
+        <Modal
+          isOpen={view.proceedTransaction}
+          toggle={() => onCloseModal()}
+          className="modal-dialog-centered"
+          size="sm"
+        >
+          <ModalBody>
+            <div className="nk-modal-head">
+              {shipment > 0 ? (
+                <div>
+                  <a href="#cancel" className="close">
+                    {" "}
+                    <Icon
+                      name="cross-sm"
+                      onClick={(ev) => {
+                        ev.preventDefault();
+                        onCloseModal();
+                      }}
+                    ></Icon>
+                  </a>
+                  <div className="nk-modal-head">
+                    <h4 className="nk-modal-title title">
+                      {/* Payment Method */}
+                      Proceed Transaction
+                      <small className="text-primary">
+                        {" "}
+                        {/* #{item.invoice_id} */}
+                      </small>
                     </h4>
-                    <b className="caption-text center">
-                      Please select shipment service
-                    </b>
                   </div>
-                )}
-              </div>
-            </ModalBody>
-          </Modal>
-        ) : (
-          <Modal
-            isOpen={view.noAddress}
-            toggle={() => onCloseModal()}
-            className="modal-dialog-centered"
-            size="sm"
-          >
-            <ModalBody>
-              <div>
-                <h4 className="center text-danger">
-                  <b>Oops!</b>
-                </h4>
-                <b
-                  style={{ textAlign: "center" }}
-                  className="caption-text center"
-                >
-                  There's no main address yet.
-                  <br></br>
-                  You can set it on profile settings
-                </b>
-              </div>
-            </ModalBody>
-          </Modal>
-        )}
+                  <div className="nk-tnx-details mt-md-2">
+                    <Col>
+                      <div className="text-smaller text-black">
+                        Make sure all information are correct
+                      </div>
+                    </Col>
+                    <div className="text-center mt-3">
+                      <Button
+                        className="toggle d-none d-md-inline"
+                        color="primary"
+                        onClick={() => {
+                          invoice();
+                          emptyCart();
+                        }}
+                      >
+                        Confirm Transaction
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <h4 className="center text-danger">
+                    <b>Yikes!</b>
+                  </h4>
+                  <b className="caption-text center">
+                    Please select shipment service
+                  </b>
+                </div>
+              )}
+            </div>
+          </ModalBody>
+        </Modal>
+        {/* // ) : (
+        //   <Modal
+        //     isOpen={view.noAddress}
+        //     toggle={() => onCloseModal()}
+        //     className="modal-dialog-centered"
+        //     size="sm"
+        //   >
+        //     <ModalBody>
+        //       <div>
+        //         <h4 className="center text-danger">
+        //           <b>Oops!</b>
+        //         </h4>
+        //         <b
+        //           style={{ textAlign: "center" }}
+        //           className="caption-text center"
+        //         >
+        //           There's no main address yet.
+        //           <br></br>
+        //           You can set it on profile settings
+        //         </b>
+        //       </div>
+        //     </ModalBody>
+        //   </Modal>
+        // )} */}
       </Content>
     </React.Fragment>
   );
